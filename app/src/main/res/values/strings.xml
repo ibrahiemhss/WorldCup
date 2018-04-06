@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">testWorldCup</string>
+    <string name="btnGoMatches">GOO To Mathes</string>
+
 </resources>

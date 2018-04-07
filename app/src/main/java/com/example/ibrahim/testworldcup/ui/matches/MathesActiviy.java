@@ -15,6 +15,7 @@ import android.util.Log;
 import com.example.ibrahim.testworldcup.R;
 import com.example.ibrahim.testworldcup.data.local.DBHelber;
 import com.example.ibrahim.testworldcup.data.local.models.Matches;
+import com.example.ibrahim.testworldcup.data.local.models.Teams;
 import com.example.ibrahim.testworldcup.ui.main.MainActivity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -24,10 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.example.ibrahim.testworldcup.data.model.AllData;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import static com.example.ibrahim.testworldcup.data.contract.FINISHED;
 import static com.example.ibrahim.testworldcup.data.contract.IMAGE_FOR_TEAM_A;
@@ -39,54 +42,73 @@ import static com.example.ibrahim.testworldcup.data.contract.TEAM_B;
 public class MathesActiviy extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef ;
-    List<AllData> list;
+    List<Teams> list;
     RecyclerView recycle;
-
-    RecyclerView RV;
+    RVFirebaseAdapter recyclerAdapter;
+    RecyclerView.LayoutManager recyclerViewlayoutManager;
+    RecyclerView.Adapter  recyclerViewadapter;
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_mathes_activiy);
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("groups");
+        myRef=database.getReference ();
+        list=new ArrayList<> ();
 
-        myRef.addValueEventListener(new ValueEventListener () {
+        recycle = (RecyclerView) findViewById( R.id.RV_comming);
+        recycle.setHasFixedSize(true);
+        recyclerViewlayoutManager = new LinearLayoutManager (this);
+        recycle.setLayoutManager(recyclerViewlayoutManager);
+        recyclerViewadapter = new RVFirebaseAdapter (list,this );
+
+
+
+
+        myRef.child ("teams").addValueEventListener (new ValueEventListener () {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                list = new ArrayList<AllData>();
-                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()){
+            public void onDataChange (DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot :dataSnapshot.getChildren ()){
+                    Teams teams=snapshot.getValue (Teams.class);
+                    list.add (teams);
+                    recycle.setAdapter(recyclerViewadapter);
+                    recyclerViewadapter.notifyDataSetChanged ();
 
-                    AllData value = dataSnapshot1.getValue(AllData.class);
-                    AllData fire = new AllData();
-                    String name = value.getGroup ();
-                    fire.setGroup (name);
-                    list.add(fire);
 
                 }
 
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Hello", "Failed to read value.", error.toException());
-            }
+            public void onCancelled (DatabaseError databaseError) {
 
+            }
         });
 
-        recycle = (RecyclerView) findViewById(R.id.RV_comming);
+    }
 
-        RVFirebaseAdapter recyclerAdapter = new RVFirebaseAdapter(list,MathesActiviy.this);
-        RecyclerView.LayoutManager recyce = new GridLayoutManager (MathesActiviy.this,2);
-        /// RecyclerView.LayoutManager recyce = new LinearLayoutManager(MainActivity.this);
-        // recycle.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
-        recycle.setLayoutManager(recyce);
-        recycle.setItemAnimator( new DefaultItemAnimator ());
-        recycle.setAdapter(recyclerAdapter);
+    public void pullOutTagsSuggestions(final String searchStr) {
 
+        myRef.orderByChild("groups")
+                .startAt(searchStr)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        if (dataSnapshot != null) {
+
+                            for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                                String suggestion = "" + suggestionSnapshot.child("RetailBranding").getValue();
+                                Log.e("Hello", "suggestion -->" + suggestion);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
     }
 /*
 

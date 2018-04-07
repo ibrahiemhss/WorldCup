@@ -5,12 +5,14 @@ package com.example.ibrahim.testworldcup.data.model;
  */
 
 public class AllData {
-    private String task;
+    private String group;
     public AllData () {}
-    public AllData (String task) {
-        this.task = task;
+
+    public String getGroup () {
+        return group;
     }
-    public String getTask() {
-        return task;
+
+    public void setGroup (String group) {
+        this.group = group;
     }
 }

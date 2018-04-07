@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.data.local;
+package com.example.ibrahim.testworldcup.data;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,12 +9,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.ibrahim.testworldcup.data.contract.DATE;
-import static com.example.ibrahim.testworldcup.data.contract.FINISHED;
-import static com.example.ibrahim.testworldcup.data.contract.STADIUM;
-import static com.example.ibrahim.testworldcup.data.contract.TB_MATCHES;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_A;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_B;
+import static com.example.ibrahim.testworldcup.data.Contract.TB_MATCHES;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_A;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_B;
 
 /**
  * Created by ibrahim on 26/12/17.

@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.data.local;
+package com.example.ibrahim.testworldcup.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,30 +7,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static com.example.ibrahim.testworldcup.data.contract.ACTIVE;
-import static com.example.ibrahim.testworldcup.data.contract.DATABASE_NAME;
-import static com.example.ibrahim.testworldcup.data.contract.DATE;
-import static com.example.ibrahim.testworldcup.data.contract.DRAW;
-import static com.example.ibrahim.testworldcup.data.contract.FINISHED;
-import static com.example.ibrahim.testworldcup.data.contract.GOALS;
-import static com.example.ibrahim.testworldcup.data.contract.GROUPS;
-import static com.example.ibrahim.testworldcup.data.contract.ID;
-import static com.example.ibrahim.testworldcup.data.contract.IMAGE_FOR_TEAM;
-import static com.example.ibrahim.testworldcup.data.contract.IMAGE_FOR_TEAM_A;
-import static com.example.ibrahim.testworldcup.data.contract.IMAGE_FOR_TEAM_B;
-import static com.example.ibrahim.testworldcup.data.contract.LOSE;
-import static com.example.ibrahim.testworldcup.data.contract.PLAYED;
-import static com.example.ibrahim.testworldcup.data.contract.SCORE;
-import static com.example.ibrahim.testworldcup.data.contract.STADIUM;
-import static com.example.ibrahim.testworldcup.data.contract.TB_MATCHES;
-import static com.example.ibrahim.testworldcup.data.contract.TB_TEAMES;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_A;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_B;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_NAME;
-import static com.example.ibrahim.testworldcup.data.contract.WIN;
+import static com.example.ibrahim.testworldcup.data.Contract.ACTIVE;
+import static com.example.ibrahim.testworldcup.data.Contract.DATABASE_NAME;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.DRAW;
+import static com.example.ibrahim.testworldcup.data.Contract.GOALS;
+import static com.example.ibrahim.testworldcup.data.Contract.GROUPS;
+import static com.example.ibrahim.testworldcup.data.Contract.ID;
+import static com.example.ibrahim.testworldcup.data.Contract.IMAGE_FOR_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.IMAGE_FOR_TEAM_A;
+import static com.example.ibrahim.testworldcup.data.Contract.IMAGE_FOR_TEAM_B;
+import static com.example.ibrahim.testworldcup.data.Contract.LOSE;
+import static com.example.ibrahim.testworldcup.data.Contract.PLAYED;
+import static com.example.ibrahim.testworldcup.data.Contract.SCORE;
+import static com.example.ibrahim.testworldcup.data.Contract.STADIUM;
+import static com.example.ibrahim.testworldcup.data.Contract.TB_MATCHES;
+import static com.example.ibrahim.testworldcup.data.Contract.TB_TEAMES;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_A;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_B;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_NAME;
+import static com.example.ibrahim.testworldcup.data.Contract.WIN;
 
 public class DBHelber extends SQLiteOpenHelper {
 

@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.data.local.models;
+package com.example.ibrahim.testworldcup.model;
 
 /**
  * Created by ibrahim on 07/04/18.
@@ -7,7 +7,7 @@ package com.example.ibrahim.testworldcup.data.local.models;
 public class Teams {
     String teamName;
     String groups;
-    String imageUri;//
+    String image;//
     Long  id;
     Long score;
     Long win;
@@ -84,13 +84,14 @@ public class Teams {
     }
 
 
-    public String getImageUri () {
-        return imageUri;
+    public String getImage () {
+        return image;
     }
 
-    public void setImageUri (String imageUri) {
-        this.imageUri = imageUri;
+    public void setImage (String image) {
+        this.image = image;
     }
+
 
     public String getTeamName () {
         return teamName;

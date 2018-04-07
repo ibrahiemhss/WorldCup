@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.data.network.connection;
+package com.example.ibrahim.testworldcup.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

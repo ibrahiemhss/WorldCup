@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.ui.matches;
+package com.example.ibrahim.testworldcup.Fragmnets;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -9,15 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ibrahim.testworldcup.Adapters.MatchesAdapter;
 import com.example.ibrahim.testworldcup.R;
-import com.example.ibrahim.testworldcup.data.local.DBHelber;
-import com.example.ibrahim.testworldcup.data.local.models.Matches;
+import com.example.ibrahim.testworldcup.data.DBHelber;
+import com.example.ibrahim.testworldcup.model.Matches;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_A;
-import static com.example.ibrahim.testworldcup.data.contract.TEAM_B;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_A;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM_B;
 
 public class TabFragmentComing extends Fragment {
     private List<Matches> matches ;
@@ -28,11 +29,11 @@ public class TabFragmentComing extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.tab_fragment_comming, container, false);
+        View rootView = inflater.inflate(R.layout.tab_fragment_matches, container, false);
 
         mDbHelber=new DBHelber( getActivity () );
         matches=new ArrayList<> ();
-        RV = (RecyclerView) rootView.findViewById( R.id.RV_comming);
+        RV = (RecyclerView) rootView.findViewById( R.id.RV_matches);
         RV.setHasFixedSize(true);
         recyclerViewlayoutManager = new LinearLayoutManager (getActivity ());
         RV.setLayoutManager(recyclerViewlayoutManager);

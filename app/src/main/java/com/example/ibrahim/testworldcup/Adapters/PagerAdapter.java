@@ -1,8 +1,12 @@
-package com.example.ibrahim.testworldcup.ui.matches;
+package com.example.ibrahim.testworldcup.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.example.ibrahim.testworldcup.Fragmnets.TabFragmentComing;
+import com.example.ibrahim.testworldcup.Fragmnets.TabFragmentLast;
+import com.example.ibrahim.testworldcup.Fragmnets.TapFragmentTeams;
 
 public class PagerAdapter  extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -23,7 +27,7 @@ public class PagerAdapter  extends FragmentStatePagerAdapter {
                 TabFragmentLast tabFragmentLast = new TabFragmentLast();
                 return tabFragmentLast;
             case 2:
-                TapFragmentToday tapFragmentToday = new TapFragmentToday();
+                TapFragmentTeams tapFragmentToday = new TapFragmentTeams ();
                 return tapFragmentToday;
             default:
                 return null;

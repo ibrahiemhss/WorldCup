@@ -1,6 +1,6 @@
 package com.example.ibrahim.testworldcup.data;
 
-public class contract {
+public class Contract {
 
     public static final String AUTHORITY = "http://worldcupapp2018.000webhostapp.com/";
     public static final String URL_SYNC = "http://worldcupapp2018.000webhostapp.com/getMatches.php";

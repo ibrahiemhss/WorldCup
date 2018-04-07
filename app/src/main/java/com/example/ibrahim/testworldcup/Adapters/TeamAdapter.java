@@ -1,22 +1,17 @@
-package com.example.ibrahim.testworldcup.ui.matches;
+package com.example.ibrahim.testworldcup.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.ibrahim.testworldcup.R;
-import com.example.ibrahim.testworldcup.data.local.models.Matches;
-import com.example.ibrahim.testworldcup.data.local.models.Teams;
-import com.example.ibrahim.testworldcup.data.model.AllData;
-import com.google.android.gms.tasks.Task;
+import com.example.ibrahim.testworldcup.model.Teams;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -24,13 +19,13 @@ import java.util.List;
  * Created by ibrahim on 07/04/18.
  */
 
-public class RVFirebaseAdapter   extends RecyclerView.Adapter<RVFirebaseAdapter.MyHoder> {
+public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
     List<Teams> list;
     Context context;
 
     AlertDialog.Builder builder;
 
-    public RVFirebaseAdapter (List<Teams> list, Context context) {
+    public TeamAdapter (List<Teams> list, Context context) {
         super();
         this.context=context;
         this.list=list;
@@ -43,7 +38,7 @@ public class RVFirebaseAdapter   extends RecyclerView.Adapter<RVFirebaseAdapter.
         view.setLayoutParams(new RecyclerView.LayoutParams( RecyclerView.LayoutParams.
                 MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
 
-        RVFirebaseAdapter.MyHoder holder = new RVFirebaseAdapter.MyHoder (view);
+        TeamAdapter.MyHoder holder = new TeamAdapter.MyHoder (view);
         return holder;
     }
 
@@ -56,31 +51,18 @@ public class RVFirebaseAdapter   extends RecyclerView.Adapter<RVFirebaseAdapter.
        holder.groups.setText(SH.getGroups ());
           holder.id.setText( String.valueOf(SH.getId ()));
            holder.score.setText( String.valueOf(SH.getScore ()));
-        holder.imagetext.setText( String.valueOf(SH.getImageUri ()));
-
-        holder.win.setText( String.valueOf(SH.getWin ()));
+     holder.win.setText( String.valueOf(SH.getWin ()));
      holder.played.setText( String.valueOf(SH.getPlayed ()));
 
-
-         Glide.with(context).load(SH.getImageUri ()).into(holder.image);
-
-
-
+     Picasso.get().load(SH.getImage ()).into(holder.image);
 
      holder.lose.setText( String.valueOf(SH.getLose ()));
      holder.goals.setText( String.valueOf(SH.getGoals ()));
  holder.draw.setText( String.valueOf(SH.getDraw ()));
     holder.active.setText(SH.getActive ());
-    holder.image.setOnClickListener (new View.OnClickListener () {
-        @Override
-        public void onClick (View view) {
-            Log.v("myImage",SH.getImageUri ());
-            Toast.makeText (context,SH.getImageUri (),Toast.LENGTH_SHORT).show ();
 
-        }
-    });
      //
-        // holder.image.setText(SH.getImage ());
+     //  holder.imagetext.setText(SH.getImage ());
 
 
 
@@ -105,7 +87,7 @@ public class RVFirebaseAdapter   extends RecyclerView.Adapter<RVFirebaseAdapter.
 
         public MyHoder(View itemView) {
             super(itemView);
-            imagetext = (TextView) itemView.findViewById(R.id.imagetext);
+
 
             teamName = (TextView) itemView.findViewById(R.id.teamName);
             groups = (TextView) itemView.findViewById (R.id.groups);

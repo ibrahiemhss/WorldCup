@@ -1,7 +1,9 @@
-package com.example.ibrahim.testworldcup.data.local;
+package com.example.ibrahim.testworldcup.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.ibrahim.testworldcup.data.DBHelber;
 
 /**
  * Created by ibrahim on 26/12/17.

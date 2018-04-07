@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.ui.main;
+package com.example.ibrahim.testworldcup.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -16,24 +15,18 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ibrahim.testworldcup.R;
-import com.example.ibrahim.testworldcup.data.local.DBHelber;
-import com.example.ibrahim.testworldcup.data.network.connection.BaseApiService;
-import com.example.ibrahim.testworldcup.data.sync.GetAllContents;
-import com.example.ibrahim.testworldcup.ui.matches.MathesActiviy;
+import com.example.ibrahim.testworldcup.data.DBHelber;
+import com.example.ibrahim.testworldcup.network.BaseApiService;
+import com.example.ibrahim.testworldcup.sync.GetAllContents;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-
-import static com.example.ibrahim.testworldcup.data.contract.URL_SYNC;
+import static com.example.ibrahim.testworldcup.data.Contract.URL_SYNC;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName ();
@@ -42,26 +35,24 @@ public class MainActivity extends AppCompatActivity {
     GetAllContents getAllContents;
     DBHelber mDbHelber;
     RequestQueue requestQueue;
-    String finished="yes".trim ();
     BaseApiService mApiService;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
- //      getAllContents=new GetAllContents (this);
-     // getAllContents.getMatches (this);
+    //  getAllContents=new GetAllContents (this);
+     //getAllContents.getMatches (this);
         mDbHelber = new DBHelber( this );
         getMatches(this);
         findViewById (R.id.BtnGoMatches).setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
-                Intent intent = new Intent (MainActivity.this, MathesActiviy.class);
+                Intent intent = new Intent (MainActivity.this, MatchesActiviy.class);
                 startActivity (intent);
             }
         });
     }
-
     public void getMatches(Context context) {
 
         StringRequest stringRequest = new StringRequest( Request.Method.POST, URL_SYNC ,
@@ -96,23 +87,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void PARSE_STATES(JSONArray array) {
-        for (int i = 0; i < array.length(); i++) {
+        for (int i = 0; i < array.length (); i++) {
             JSONObject json = null;
             try {
-                json = array.getJSONObject( i );
+                json = array.getJSONObject (i);
 
-                String TeamA = json.getString("TeamA");
-                String TeamB = json.getString("TeamB");
+                String TeamA = json.getString ("TeamA");
+                String TeamB = json.getString ("TeamB");
 
-                mDbHelber.addMathesList ( TeamA, TeamB);
+                mDbHelber.addMathesList (TeamA, TeamB);
 
-                Log.d( TAG, "value from face server : \n TeamA" + TeamA + "\n TeamB :" + TeamB);
+                Log.d (TAG, "value from face server : \n TeamA" + TeamA + "\n TeamB :" + TeamB);
 
             } catch (JSONException e) {
-                e.printStackTrace();
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d( TAG, "JSONException bbbb"+e.getMessage());
+                e.printStackTrace ();
+                Log.d (TAG, "JSONException bbbb" + e.getMessage ());
 
             }
         }
-}}
+    }
+}

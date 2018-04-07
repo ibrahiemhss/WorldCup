@@ -1,7 +1,6 @@
-package com.example.ibrahim.testworldcup.data.sync;
+package com.example.ibrahim.testworldcup.sync;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -12,24 +11,18 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ibrahim.testworldcup.data.local.DBHelber;
-import com.example.ibrahim.testworldcup.data.network.connection.BaseApiService;
-import com.example.ibrahim.testworldcup.data.network.connection.UtilsApi;
+import com.example.ibrahim.testworldcup.data.DBHelber;
+import com.example.ibrahim.testworldcup.network.BaseApiService;
+import com.example.ibrahim.testworldcup.network.UtilsApi;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-
-import static com.example.ibrahim.testworldcup.data.contract.URL_SYNC;
+import static com.example.ibrahim.testworldcup.data.Contract.URL_SYNC;
 
 /**
  * Created by ibrahim on 26/12/17.
@@ -115,7 +108,7 @@ public class GetAllContents {
                     @Override
                     public void onResponse(String response) {
                         try {
-                     //       JSONObject jObj = new JSONObject(response);
+                            //       JSONObject jObj = new JSONObject(response);
 
                             JSONArray jsonArray = new JSONArray( response );
 
@@ -142,35 +135,23 @@ public class GetAllContents {
     }
 
     public void PARSE_STATES(JSONArray array) {
-        for (int i = 0; i < array.length(); i++) {
+        for (int i = 0; i < array.length (); i++) {
             JSONObject json = null;
             try {
-                json = array.getJSONObject( i );
+                json = array.getJSONObject (i);
 
-                String TeamA = json.getString("TeamA");
-                String TeamB = json.getString("TeamB");
-         /*     String home_team =json.getString("home_team");
-                String away_team = json.getString("away_team");
-                String home_result = json.getString("home_result");
-                String away_result =json.getString("away_result");
-                String date =json.getString("date");
-                String stadium =json.getString("stadium");
-                String channels =json.getString("channels");
-                String finished =json.getString("finished");
-*/
-                //    String error_message = jsonRESULTS.getString("error_msg");
-                mDbHelber.addMathesList ( TeamA, TeamB);
+                String TeamA = json.getString ("TeamA");
+                String TeamB = json.getString ("TeamB");
 
-              Log.d( TAG, "value from face server : \n TeamA" + TeamA + "\n TeamB :" + TeamB);
+                mDbHelber.addMathesList (TeamA, TeamB);
+
+                Log.d (TAG, "value from face server : \n TeamA" + TeamA + "\n TeamB :" + TeamB);
 
             } catch (JSONException e) {
-                e.printStackTrace();
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d( TAG, "JSONException bbbb"+e.getMessage());
+                e.printStackTrace ();
+                Log.d (TAG, "JSONException bbbb" + e.getMessage ());
 
             }
         }
     }
-
-
 }

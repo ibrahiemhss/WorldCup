@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.ui.matches;
+package com.example.ibrahim.testworldcup.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ibrahim.testworldcup.R;
-import com.example.ibrahim.testworldcup.data.local.models.Matches;
+import com.example.ibrahim.testworldcup.model.Matches;
 
 import java.util.List;
 
@@ -52,11 +52,11 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
         final Matches SH = matches.get(position);
 
         holder.TeamA.setText(SH.getTeamA ());
-        holder.TeamB.setText(SH.getTeamB ());
+//        holder.TeamB.setText(SH.getTeamB ());
    //     holder.image_for_teamA.setText(SH.getImage_for_teamA ());
   //      holder.image_for_teamB.setText(SH.getImage_for_teamB ());
-        holder.date.setText(SH.getDate ());
-        holder.stadium.setText(SH.getStadium ());
+//        holder.date.setText(SH.getDate ());
+   //     holder.stadium.setText(SH.getStadium ());
 
 //        holder.user_id.setText(SH.getUser_id());
      //   holder.car_id.setText(SH.getCar_id());

@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.ui.matches;
+package com.example.ibrahim.testworldcup.Fragmnets;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +12,6 @@ public class TabFragmentLast  extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_fragment_comming, container, false);
+        return inflater.inflate(R.layout.tab_fragment_matches, container, false);
     }
 }

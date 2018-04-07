@@ -1,4 +1,4 @@
-package com.example.ibrahim.testworldcup.data.local.models;
+package com.example.ibrahim.testworldcup.model;
 
 public class Matches {
     String TeamA;

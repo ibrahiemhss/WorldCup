@@ -34,7 +34,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
 
     @Override
     public MyHoder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.list_item_teams, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.list_item_team, parent, false);
         view.setLayoutParams(new RecyclerView.LayoutParams( RecyclerView.LayoutParams.
                 MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
 
@@ -49,7 +49,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
 
         holder.teamName.setText(SH.getTeamName ().toString ());
        holder.groups.setText(SH.getGroups ());
-          holder.id.setText( String.valueOf(SH.getId ()));
+//          holder.id.setText( String.valueOf(SH.getId ()));
            holder.score.setText( String.valueOf(SH.getScore ()));
      holder.win.setText( String.valueOf(SH.getWin ()));
      holder.played.setText( String.valueOf(SH.getPlayed ()));
@@ -88,10 +88,9 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
         public MyHoder(View itemView) {
             super(itemView);
 
-
-            teamName = (TextView) itemView.findViewById(R.id.teamName);
+ teamName = (TextView) itemView.findViewById(R.id.teamName);
             groups = (TextView) itemView.findViewById (R.id.groups);
-            id = (TextView) itemView.findViewById (R.id.id);
+     //       id = (TextView) itemView.findViewById (R.id.id);
             score = (TextView) itemView.findViewById (R.id.score);
             win = (TextView) itemView.findViewById (R.id.win);
             played = (TextView) itemView.findViewById (R.id.played);
@@ -99,7 +98,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
             goals = (TextView) itemView.findViewById (R.id.goals);
             draw = (TextView) itemView.findViewById (R.id.draw);
             active = (TextView) itemView.findViewById (R.id.active);
-            image = (ImageView) itemView.findViewById (R.id.image);
+            image = (ImageView) itemView.findViewById (R.id.list_image_team);
 
 
         }

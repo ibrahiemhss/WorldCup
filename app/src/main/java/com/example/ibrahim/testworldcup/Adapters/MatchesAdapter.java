@@ -90,7 +90,7 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
         MyHolder (View view) {
             super (view);
-            TeamA = (TextView) view.findViewById (R.id.TeamA);
+            TeamA = (TextView) view.findViewById (R.id.teamA);
             //TeamB = (TextView) view.findViewById (R.id.TeamB);
            // date = (TextView) view.findViewById (R.id.date);
          //   image_for_teamA = (ImageView) view.findViewById (R.id.image_for_teamA);

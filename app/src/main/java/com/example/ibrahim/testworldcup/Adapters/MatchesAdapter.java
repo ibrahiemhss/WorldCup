@@ -2,11 +2,19 @@ package com.example.ibrahim.testworldcup.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.ibrahim.testworldcup.R;
@@ -60,6 +68,27 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
 //        holder.user_id.setText(SH.getUser_id());
      //   holder.car_id.setText(SH.getCar_id());
+        ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
+            @Override
+            public Shader resize(int width, int height) {
+                LinearGradient lg = new LinearGradient(0, 0, 0, holder.lineMatches.getHeight(),
+                        new int[] {
+                                Color.GRAY,
+                                Color.WHITE,
+                                Color.LTGRAY,
+                                Color.DKGRAY }, //substitute the correct colors for these
+                        new float[] {
+                                0, 0.45f, 0.55f, 1 },
+                        Shader.TileMode.REPEAT);
+
+                return lg;
+            }
+        };
+        PaintDrawable p = new PaintDrawable();
+        p.setShape(new RectShape ());
+        p.setShaderFactory(sf);
+        p.setCornerRadius(70);
+        holder.lineMatches.setBackground((Drawable)p);
 
 
     }
@@ -87,6 +116,7 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
         TextView date;
         TextView stadium;
         TextView finished;
+        LinearLayout lineMatches;
 
         MyHolder (View view) {
             super (view);
@@ -96,6 +126,7 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
          //   image_for_teamA = (ImageView) view.findViewById (R.id.image_for_teamA);
          //   image_for_teamB = (ImageView) view.findViewById (R.id.image_for_teamB);
         //    stadium = (TextView) view.findViewById (R.id.stadium);
+            lineMatches = view.findViewById (R.id.lineMatches);
 
 
         }

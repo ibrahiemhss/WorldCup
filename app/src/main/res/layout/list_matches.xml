@@ -12,6 +12,7 @@
        android:layout_marginLeft="5dp"
        android:layout_gravity="center"
        android:layout_marginTop="5dp"
+       android:layout_weight="4"
        android:gravity="center"
        android:layout_marginRight="5dp"
        android:background="@drawable/black_oval"
@@ -125,13 +126,17 @@
        android:layout_height="wrap_content"
        android:layout_marginRight="16dp"
        android:layout_marginLeft="16dp"
-       android:layout_marginTop="1dp"
-       android:background="@drawable/matches">
+       android:layout_marginTop="2dp"
+       android:scrollbarAlwaysDrawHorizontalTrack="true"
+       android:background="@drawable/matches"
+       android:orientation="horizontal">
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="match_parent"
+          android:padding="10dp"
           android:background="@drawable/transparent_light_green"
           android:orientation="vertical">
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -139,13 +144,12 @@
              android:layout_marginLeft="15dp"
              android:padding="8dp"
              android:layout_marginRight="15dp"
-             android:layout_marginTop="10dp"
              android:background="@drawable/transparent_dark_green">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:text="score"
+                android:text="goals"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 />
@@ -158,10 +162,11 @@
                 android:textAlignment="center"
                 />
             <TextView
+                android:id="@+id/goals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:text="23"
+                android:text="yes"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 />
@@ -180,7 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:text="score"
+                android:text="active"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 />
@@ -193,10 +198,47 @@
                 android:textAlignment="center"
                 />
             <TextView
+                android:id="@+id/active"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorWhite"
-                android:text="23"
+                android:text="yes"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                />
+
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginLeft="15dp"
+             android:padding="8dp"
+             android:layout_marginRight="15dp"
+             android:layout_marginTop="10dp"
+             android:background="@drawable/transparent_dark_green">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="groups"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text=":"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                />
+            <TextView
+                android:id="@+id/groups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:text="A"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 />
@@ -227,6 +269,112 @@
              android:textAlignment="center"
              />
          <TextView
+             android:id="@+id/score"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="23"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+
+      </LinearLayout> <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginLeft="15dp"
+          android:padding="8dp"
+          android:layout_marginRight="15dp"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/transparent_dark_green">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="win"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text=":"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:id="@+id/win"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="23"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+
+      </LinearLayout> <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginLeft="15dp"
+          android:padding="8dp"
+          android:layout_marginRight="15dp"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/transparent_dark_green">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="played"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text=":"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:id="@+id/played"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="23"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+
+      </LinearLayout> <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:layout_marginLeft="15dp"
+          android:padding="8dp"
+          android:layout_marginRight="15dp"
+          android:layout_marginTop="10dp"
+          android:background="@drawable/transparent_dark_green">
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text="lose"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:textColor="@color/colorWhite"
+             android:text=":"
+             android:layout_weight="1"
+             android:textAlignment="center"
+             />
+         <TextView
+             android:id="@+id/lose"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:textColor="@color/colorWhite"
@@ -282,7 +430,7 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:textColor="@color/colorWhite"
-             android:text="score"
+             android:text="draw"
              android:layout_weight="1"
              android:textAlignment="center"
              />
@@ -295,108 +443,7 @@
              android:textAlignment="center"
              />
          <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="23"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-
-      </LinearLayout> <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:layout_marginLeft="15dp"
-          android:padding="8dp"
-          android:layout_marginRight="15dp"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/transparent_dark_green">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="score"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text=":"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="23"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-
-      </LinearLayout> <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:layout_marginLeft="15dp"
-          android:padding="8dp"
-          android:layout_marginRight="15dp"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/transparent_dark_green">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="score"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text=":"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="23"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-
-      </LinearLayout> <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:layout_marginLeft="15dp"
-          android:padding="8dp"
-          android:layout_marginRight="15dp"
-          android:layout_marginTop="10dp"
-          android:background="@drawable/transparent_dark_green">
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text="score"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:textColor="@color/colorWhite"
-             android:text=":"
-             android:layout_weight="1"
-             android:textAlignment="center"
-             />
-         <TextView
+             android:id="@+id/draw"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:textColor="@color/colorWhite"
@@ -406,49 +453,16 @@
              />
 
       </LinearLayout>
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:layout_marginLeft="15dp"
-             android:padding="8dp"
-             android:layout_marginRight="15dp"
-             android:layout_marginTop="10dp"
-             android:layout_marginBottom="10dp"
-             android:background="@drawable/transparent_dark_green">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:text="score"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:text=":"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:text="23"
-                android:layout_marginBottom="15dp"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                />
-
-         </LinearLayout>
       </LinearLayout>
 
    </LinearLayout>
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="1dp"
     android:layout_marginTop="5dp"
-    android:background="@color/colorBlack"></LinearLayout>
+    android:background="@color/colorBlack">
+
 </LinearLayout>
+   </LinearLayout>

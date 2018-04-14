@@ -17,8 +17,6 @@ import com.example.ibrahim.testworldcup.model.Matches;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.ibrahim.testworldcup.data.Contract.TEAM_A;
-import static com.example.ibrahim.testworldcup.data.Contract.TEAM_B;
 
 public class TabFragmentComing extends Fragment {
     private List<Matches> matches ;
@@ -46,23 +44,23 @@ return rootView;
     }
     private void displayOfline(){
         matches.clear();
-
+/*
         Cursor cursor = mDbHelber.getMatchesList( );
         while (cursor.moveToNext()) {
             Matches matches2;
             matches2 = new Matches(
                     cursor.getString( cursor.getColumnIndex( TEAM_A )),
                     cursor.getString( cursor.getColumnIndex( TEAM_B ) )
-                /*    cursor.getString( cursor.getColumnIndex( DATE ))
+                *//*    cursor.getString( cursor.getColumnIndex( DATE ))
                     cursor.getString( cursor.getColumnIndex( IMAGE_FOR_TEAM_A ) ),
                     cursor.getString( cursor.getColumnIndex( IMAGE_FOR_TEAM_B ) ),
                     cursor.getString( cursor.getColumnIndex( STADIUM ) ),
                     cursor.getString( cursor.getColumnIndex( FINISHED ))
-                  */
+                  *//*
             );
 
 
             matches.add( matches2 );
 
-        }
+        }*/
 }}

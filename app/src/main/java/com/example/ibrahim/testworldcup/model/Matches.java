@@ -1,35 +1,79 @@
 package com.example.ibrahim.testworldcup.model;
 
 public class Matches {
-    String TeamA;
-    String TeamB;
+    long id;
+    String away_team;
+    String home_team;
+    long away_result;
+    long home_result;
     String date;
-    String image_for_teamA;
-    String image_for_teamB;
 
-    public Matches (String teamA, String teamB) {
-        TeamA = teamA;
-        TeamB = teamB;
-    }
 
     String stadium;
     String finished;
+    String type;
 
-    public String getTeamA () {
-        return TeamA;
+    public Matches (long id, String away_team, String home_team, long away_result, long home_result, String date, String stadium, String finished, String type) {
+        this.id = id;
+        this.away_team = away_team;
+        this.home_team = home_team;
+        this.away_result = away_result;
+        this.home_result = home_result;
+        this.date = date;
+        this.stadium = stadium;
+        this.finished = finished;
+        this.type = type;
     }
 
-    public void setTeamA (String teamA) {
-        TeamA = teamA;
+    public Matches (long aLong, String string, String string1, String string2, long aLong1, long aLong2, String string3, String string4, String string5, String string6) {
     }
 
-    public String getTeamB () {
-        return TeamB;
+    public long getAway_result () {
+        return away_result;
     }
 
-    public void setTeamB (String teamB) {
-        TeamB = teamB;
+    public void setAway_result (long away_result) {
+        this.away_result = away_result;
     }
+
+    public long getHome_result () {
+        return home_result;
+    }
+
+    public void setHome_result (long home_result) {
+        this.home_result = home_result;
+    }
+    public String getHome_team () {
+        return home_team;
+    }
+
+    public void setHome_team (String home_team) {
+        this.home_team = home_team;
+    }
+    public long getId () {
+        return id;
+    }
+
+    public void setId (long id) {
+        this.id = id;
+    }
+
+    public String getAway_team () {
+        return away_team;
+    }
+
+    public void setAway_team (String away_team) {
+        this.away_team = away_team;
+    }
+
+    public String getHome_teame () {
+        return home_team;
+    }
+
+    public void setHome_teame (String home_teame) {
+        this.home_team = home_teame;
+    }
+
 
     public String getDate () {
         return date;
@@ -39,28 +83,21 @@ public class Matches {
         this.date = date;
     }
 
-    public String getImage_for_teamA () {
-        return image_for_teamA;
-    }
-
-    public void setImage_for_teamA (String image_for_teamA) {
-        this.image_for_teamA = image_for_teamA;
-    }
-
-    public String getImage_for_teamB () {
-        return image_for_teamB;
-    }
-
-    public void setImage_for_teamB (String image_for_teamB) {
-        this.image_for_teamB = image_for_teamB;
-    }
-
     public String getStadium () {
         return stadium;
     }
 
     public void setStadium (String stadium) {
         this.stadium = stadium;
+    }
+
+
+    public String getType () {
+        return type;
+    }
+
+    public void setType (String type) {
+        this.type = type;
     }
 
     public String getFinished () {

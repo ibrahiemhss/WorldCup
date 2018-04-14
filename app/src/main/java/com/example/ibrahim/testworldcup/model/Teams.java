@@ -5,75 +5,34 @@ package com.example.ibrahim.testworldcup.model;
  */
 
 public class Teams {
-    String teamName;
-    String groups;
-    String image;//
+    String name;
+    String iso2;
+    String flag;//
     Long  id;
-    Long score;
-    Long win;
-    Long played;
-    Long lose;
-    Long goals;
 
-    public Long getScore () {
-        return score;
+    public String getName () {
+        return name;
     }
 
-    public void setScore (Long score) {
-        this.score = score;
+    public void setName (String name) {
+        this.name = name;
     }
 
-    public Long getWin () {
-        return win;
+    public String getIso2 () {
+        return iso2;
     }
 
-    public void setWin (Long win) {
-        this.win = win;
+    public void setIso2 (String iso2) {
+        this.iso2 = iso2;
     }
 
-    public Long getPlayed () {
-        return played;
+    public String getFlag () {
+        return flag;
     }
 
-    public void setPlayed (Long played) {
-        this.played = played;
+    public void setFlag (String flag) {
+        this.flag = flag;
     }
-
-    public Long getLose () {
-        return lose;
-    }
-
-    public void setLose (Long lose) {
-        this.lose = lose;
-    }
-
-    public Long getGoals () {
-        return goals;
-    }
-
-    public void setGoals (Long goals) {
-        this.goals = goals;
-    }
-
-    public Long getDraw () {
-        return draw;
-    }
-
-    public void setDraw (Long draw) {
-        this.draw = draw;
-    }
-
-    Long draw;
-
-    public String getActive () {
-        return active;
-    }
-
-    public void setActive (String active) {
-        this.active = active;
-    }
-
-    String active;//,
 
     public Long getId () {
         return id;
@@ -82,32 +41,4 @@ public class Teams {
     public void setId (Long id) {
         this.id = id;
     }
-
-
-    public String getImage () {
-        return image;
-    }
-
-    public void setImage (String image) {
-        this.image = image;
-    }
-
-
-    public String getTeamName () {
-        return teamName;
-    }
-
-    public void setTeamName (String teamName) {
-        this.teamName = teamName;
-    }
-
-    public String getGroups () {
-        return groups;
-    }
-
-    public void setGroups (String groups) {
-        this.groups = groups;
-    }
-
-
 }

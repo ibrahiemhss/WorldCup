@@ -10,8 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import static com.example.ibrahim.testworldcup.data.Contract.TB_MATCHES;
-import static com.example.ibrahim.testworldcup.data.Contract.TEAM_A;
-import static com.example.ibrahim.testworldcup.data.Contract.TEAM_B;
 
 /**
  * Created by ibrahim on 26/12/17.
@@ -28,11 +26,11 @@ public class DbGetMatchesBackend extends DbObject {
         super( context );
         this.con = context;
     }
-    public ArrayList<String> getTeamA() {
+     /* public ArrayList<String> getTeamA() {
         View view = new TextView (con);
         TextView tv = (TextView) view;
 
-        Cursor cr=this.getDbConnection().query(TB_MATCHES, new String[] {TEAM_A,TEAM_B,},
+      Cursor cr=this.getDbConnection().query(TB_MATCHES, new String[] {TEAM_A,TEAM_B,},
                 null, null, null, null, null);
         ArrayList<String> temparrayList = new ArrayList<String>();
         SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -42,20 +40,20 @@ public class DbGetMatchesBackend extends DbObject {
             {
                 temparrayList.add(cr.getString(cr.getColumnIndex(TEAM_A)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(TEAM_B)));
-              /*  temparrayList.add(cr.getString(cr.getColumnIndex(DATE)));
+              *//*  temparrayList.add(cr.getString(cr.getColumnIndex(DATE)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(IMAGE_FOR_TEAM_A)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(IMAGE_FOR_TEAM_B)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(AWAY_RESULT)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(STADIUM)));
                 temparrayList.add(cr.getString(cr.getColumnIndex(FINISHED)));
-*/
+*//*
             }
             while (cr.moveToNext());
         }
         return temparrayList;
 
 
-    }
+    }*/
 /*
 
 

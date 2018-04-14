@@ -2,108 +2,90 @@ package com.example.ibrahim.testworldcup.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.ibrahim.testworldcup.Adapters.MatchesAdapter;
 import com.example.ibrahim.testworldcup.R;
 import com.example.ibrahim.testworldcup.data.DBHelber;
-import com.example.ibrahim.testworldcup.network.BaseApiService;
+import com.example.ibrahim.testworldcup.model.Matches;
 import com.example.ibrahim.testworldcup.sync.GetAllContents;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.example.ibrahim.testworldcup.data.Contract.URL_SYNC;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.CITY;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_RESULT;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.ID;
+import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = MainActivity.class.getSimpleName ();
 
-
+    private List<Matches> matches ;
     GetAllContents getAllContents;
+    RecyclerView.LayoutManager recyclerViewlayoutManager;
+    RecyclerView.Adapter  recyclerViewadapter;
     DBHelber mDbHelber;
-    RequestQueue requestQueue;
-    BaseApiService mApiService;
+    RecyclerView RV;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-    //  getAllContents=new GetAllContents (this);
-     //getAllContents.getMatches (this);
-        mDbHelber = new DBHelber( this );
-        getMatches(this);
+       getAllContents=new GetAllContents (this);
+        getAllContents.getFBStaduims (this);
+        getAllContents.getFBSTvChannel (this);
+        getAllContents.getFBSTeams (this);
+        getAllContents.getFBSMatches (this);
+
+
+        mDbHelber=new DBHelber( this );
+        matches=new ArrayList<> ();
+    /*    RV = (RecyclerView) findViewById( R.id.RV_main);
+        RV.setHasFixedSize(true);
+        recyclerViewlayoutManager = new LinearLayoutManager (this);
+        RV.setLayoutManager(recyclerViewlayoutManager);
+        recyclerViewadapter = new MatchesAdapter (matches,this);
+        RV.setAdapter(recyclerViewadapter);
+        recyclerViewadapter.notifyDataSetChanged();
+        displayOfline();
+
         findViewById (R.id.BtnGoMatches).setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
                 Intent intent = new Intent (MainActivity.this, MatchesActiviy.class);
                 startActivity (intent);
             }
-        });
+        });*/
+
     }
-    public void getMatches(Context context) {
+    private void displayOfline(){
+        matches.clear();
+        Cursor cursor = mDbHelber.getMatchesList( );
+        while (cursor.moveToNext()) {
+            Matches matches2;
+            matches2 = new Matches(
+                    cursor.getLong ( cursor.getColumnIndex( ID )),
+                    cursor.getString( cursor.getColumnIndex( AWAY_TEAM ) ),
+                   cursor.getString( cursor.getColumnIndex( HOME_TEAM )),
+                    cursor.getLong( cursor.getColumnIndex( AWAY_RESULT ) ),
+                    cursor.getLong( cursor.getColumnIndex( HOME_RESULT ) ),
+                    cursor.getString( cursor.getColumnIndex( DATE ) ),
+                    cursor.getString( cursor.getColumnIndex( CITY ) ),
+                    cursor.getString ( cursor.getColumnIndex( FINISHED )),
+                    cursor.getString( cursor.getColumnIndex( TYPE ) ));
 
-        StringRequest stringRequest = new StringRequest( Request.Method.POST, URL_SYNC ,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            //       JSONObject jObj = new JSONObject(response);
+            matches.add( matches2 );
 
-                            JSONArray jsonArray = new JSONArray( response );
-
-                            PARSE_STATES( jsonArray );
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        } ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String> ();
-                params.put("finished", "yes");
-
-                return params;
-            }
-        };
-        requestQueue = Volley.newRequestQueue( context );
-        requestQueue.add( stringRequest );
-    }
-
-    public void PARSE_STATES(JSONArray array) {
-        for (int i = 0; i < array.length (); i++) {
-            JSONObject json = null;
-            try {
-                json = array.getJSONObject (i);
-
-                String TeamA = json.getString ("TeamA");
-                String TeamB = json.getString ("TeamB");
-
-                mDbHelber.addMathesList (TeamA, TeamB);
-
-                Log.d (TAG, "value from face server : \n TeamA" + TeamA + "\n TeamB :" + TeamB);
-
-            } catch (JSONException e) {
-                e.printStackTrace ();
-                Log.d (TAG, "JSONException bbbb" + e.getMessage ());
-
-            }
         }
     }
 }

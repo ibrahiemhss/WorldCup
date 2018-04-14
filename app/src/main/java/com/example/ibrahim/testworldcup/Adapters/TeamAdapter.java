@@ -23,11 +23,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by ibrahim on 07/04/18.
  */
 
-public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
+public class TeamAdapter /*extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
     List<Teams> list;
     Context context;
 
@@ -55,19 +57,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
     public void onBindViewHolder(final MyHoder holder, int position) {
         final Teams SH = list.get(position);
 
-        holder.teamName.setText(SH.getTeamName ().toString ());
-       holder.groups.setText(SH.getGroups ());
-//          holder.id.setText( String.valueOf(SH.getId ()));
-           holder.score.setText( String.valueOf(SH.getScore ()));
-     holder.win.setText( String.valueOf(SH.getWin ()));
-     holder.played.setText( String.valueOf(SH.getPlayed ()));
+       holder.teamNames.setText(SH.getName ());
+       holder.iso2.setText(SH.getIso2 ());
+         holder.id.setText( String.valueOf(SH.getId ()));
 
-     Picasso.get().load(SH.getImage ()).into(holder.image);
+     Picasso.get().load(SH.getFlag ()).into(holder.flag);
 
-     holder.lose.setText( String.valueOf(SH.getLose ()));
-     holder.goals.setText( String.valueOf(SH.getGoals ()));
- holder.draw.setText( String.valueOf(SH.getDraw ()));
-    holder.active.setText(SH.getActive ());
         ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
             @Override
             public Shader resize(int width, int height) {
@@ -109,31 +104,26 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.MyHoder> {
 
     class MyHoder extends RecyclerView.ViewHolder{
 
-        TextView teamName,groups,id,score,win,played,lose,goals,draw,active,imagetext;
-        ImageView image;
+        TextView teamNames,iso2,id;
+        CircleImageView flag;
         LinearLayout   lineTeam;
 
 
         public MyHoder(View itemView) {
             super(itemView);
 
- teamName = (TextView) itemView.findViewById(R.id.teamName);
-            groups = (TextView) itemView.findViewById (R.id.groups);
+            teamNames = (TextView) itemView.findViewById(R.id.teamNames);
+            iso2 = (TextView) itemView.findViewById (R.id.iso2);
      //       id = (TextView) itemView.findViewById (R.id.id);
-            score = (TextView) itemView.findViewById (R.id.score);
-            win = (TextView) itemView.findViewById (R.id.win);
-            played = (TextView) itemView.findViewById (R.id.played);
-            lose = (TextView) itemView.findViewById (R.id.lose);
-            goals = (TextView) itemView.findViewById (R.id.goals);
-            draw = (TextView) itemView.findViewById (R.id.draw);
-            active = (TextView) itemView.findViewById (R.id.active);
-            image = (ImageView) itemView.findViewById (R.id.list_image_team);
+            id = (TextView) itemView.findViewById (R.id.id);
+            flag = (CircleImageView) itemView.findViewById (R.id.list_image_team);
             lineTeam =  itemView.findViewById (R.id.lineTeam);
 
 
 
         }
     }
-
+*/
+{
 }
 

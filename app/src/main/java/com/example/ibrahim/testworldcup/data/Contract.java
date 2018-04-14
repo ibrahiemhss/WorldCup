@@ -9,36 +9,62 @@ public class Contract {
     //TODO constants for SQlite database
     //database name
     public static final String TAG = "worldCup";
-    public static final String DATABASE_NAME="worldCup";
-    //the id column for all tables
+    public static final String DATABASE_NAME="tb_worldCup";
+    //generall column repeat in  all tables
     public static final String ID="id";
-
-
-
- public static final String TB_MATCHES="tb_matches";
-    public static final String TEAM_A="TeamA";
-    public static final String TEAM_B="TeamB";
+    public static final String NAME="name";
+    public static final String TYPE="type";
+    public static final String FK_STADIUM="stadium";
+    public static final String HOME_TEAM="home_team";
+    public static final String AWAY_TEAM="away_team";
+    public static final String HOME_RESULT="home_result";
+    public static final String AWAY_RESULT="away_result";
     public static final String DATE="date";
-    public static final String IMAGE_FOR_TEAM_A="image_for_teamA";
-    public static final String IMAGE_FOR_TEAM_B="image_for_teamB";
-    public static final String STADIUM="stadium";
+    public static final String FK_CHANNELS="channels";
     public static final String FINISHED="finished";
+    public static final String FK_NAME="fk_name";
+    public static final String FK_HOME_TEAM="home_team";
+    public static final String FK_AWAY_TEAM="away_team";
+    public static final String FK_HOME_TEAM_FLAG="home_team_flag";
+    public static final String FK_AWAY_TEAM_FLAG="away_team_flag";
 
 
 
-    //database tables for teames
+
+
+
+
+    public static final String TB_STADIUMS="tb_stadiums";
+    public static final String CITY="city";
+    public static final String LAT="lat";
+    public static final String LNG="lng";
+
+    public static final String TB_TV_CHANNELS="tb_tvchannels";
+    public static final String ICON="icon";
+
     public static final String TB_TEAMES="tb_teames";
-    public static final String TEAM_NAME="team_name";
-    public static final String GROUPS="groups";
-    public static final String PLAYED="palyed";
-    public static final String WIN="win";
-    public static final String DRAW="draw";
-    public static final String LOSE="lose";
-    public static final String SCORE="score";
-    public static final String GOALS="goals";
-    public static final String ACTIVE="active";
-    public static final String IMAGE_FOR_TEAM="image_for_team";
+    public static final String ISO2="iso2";
+    public static final String FLAG="flag";
 
+
+    public static final String TB_GROUPS="tb_groups";
+    public static final String GROUP_A="a";
+    public static final String GROUP_B="b";
+    public static final String GROUP_C="c";
+    public static final String GROUP_D="d";
+    public static final String GROUP_E="e";
+    public static final String GROUP_F="f";
+    public static final String GROUP_G="g";
+    public static final String GROUP_H="h";
+
+    public static final String TB_MATCHES="tb_matches";
+
+    public static final String TB_KNOCKOUT="tb_knockout";
+    public static final String ROUND_16="round_16";
+    public static final String ROUN_8="round_8";
+    public static final String ROUN_4="round_4";
+    public static final String ROUN_2_LOSER="round_2_loser";
+    public static final String ROUN_2="round_2";
 
 
 

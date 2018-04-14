@@ -59,16 +59,20 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
     public void onBindViewHolder(final MyHolder holder, final int position) {
         final Matches SH = matches.get(position);
 
-        holder.TeamA.setText(SH.getTeamA ());
-//        holder.TeamB.setText(SH.getTeamB ());
-   //     holder.image_for_teamA.setText(SH.getImage_for_teamA ());
-  //      holder.image_for_teamB.setText(SH.getImage_for_teamB ());
-//        holder.date.setText(SH.getDate ());
-   //     holder.stadium.setText(SH.getStadium ());
+        holder.away_team.setText(SH.getAway_team ());
+       holder.home_team.setText(SH.getHome_team ());
+        holder.away_result.setText(String.valueOf (SH.getAway_result ()));
+        holder.home_result.setText(String.valueOf (SH.getHome_result ()));
+        holder.date.setText(SH.getDate ());
+        holder.stadium.setText(SH.getStadium ());
+        //holder.finished.setText(SH.getAway_team ());
+        //holder.type.setText(SH.getHome_team ());
 
-//        holder.user_id.setText(SH.getUser_id());
-     //   holder.car_id.setText(SH.getCar_id());
-        ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
+
+
+
+
+/*        ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
             @Override
             public Shader resize(int width, int height) {
                 LinearGradient lg = new LinearGradient(0, 0, 0, holder.lineMatches.getHeight(),
@@ -87,8 +91,8 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
         PaintDrawable p = new PaintDrawable();
         p.setShape(new RectShape ());
         p.setShaderFactory(sf);
-        p.setCornerRadius(70);
-        holder.lineMatches.setBackground((Drawable)p);
+        p.setCornerRadius(70);*/
+     //   holder.lineMatches.setBackground((Drawable)p);
 
 
     }
@@ -109,24 +113,25 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
 
 
-        TextView TeamA;
-        TextView TeamB;
-        ImageView image_for_teamA;
-        ImageView image_for_teamB;
+        TextView away_team;
+        TextView home_team;
         TextView date;
         TextView stadium;
-        TextView finished;
-        LinearLayout lineMatches;
+        TextView away_result;
+        TextView home_result;
+
+        LinearLayout lin_result;
 
         MyHolder (View view) {
             super (view);
-            TeamA = (TextView) view.findViewById (R.id.teamA);
-            //TeamB = (TextView) view.findViewById (R.id.TeamB);
-           // date = (TextView) view.findViewById (R.id.date);
-         //   image_for_teamA = (ImageView) view.findViewById (R.id.image_for_teamA);
-         //   image_for_teamB = (ImageView) view.findViewById (R.id.image_for_teamB);
-        //    stadium = (TextView) view.findViewById (R.id.stadium);
-            lineMatches = view.findViewById (R.id.lineMatches);
+            away_team = (TextView) view.findViewById (R.id.away_team);
+            home_team = (TextView) view.findViewById (R.id.home_team);
+            date = (TextView) view.findViewById (R.id.date_m);
+            stadium = (TextView) view.findViewById (R.id.stadium_m);
+            away_result = (TextView) view.findViewById (R.id.away_result);
+            home_result = (TextView) view.findViewById (R.id.home_result);
+
+            lin_result = view.findViewById (R.id.lin_result);
 
 
         }

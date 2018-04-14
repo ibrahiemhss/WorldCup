@@ -40,9 +40,9 @@ public class TapFragmentTeams extends Fragment {
         recycle.setHasFixedSize(true);
         recyclerViewlayoutManager = new LinearLayoutManager (getActivity ());
         recycle.setLayoutManager(recyclerViewlayoutManager);
-        recyclerViewadapter = new TeamAdapter (list,getActivity () );
+      //  recyclerViewadapter = new TeamAdapter (list,getActivity () );
 
-        myRef.child ("teams").addValueEventListener (new ValueEventListener () {
+        myRef.child ("matches").addValueEventListener (new ValueEventListener () {
 
             @Override
             public void onDataChange (DataSnapshot dataSnapshot) {

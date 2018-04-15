@@ -5,6 +5,7 @@ public class Contract {
     public static final String AUTHORITY = "http://worldcupapp2018.000webhostapp.com/";
     public static final String URL_SYNC = "http://worldcupapp2018.000webhostapp.com/getMatches.php";
 
+    public static final String DATE_FORMATING = "dd-M-yyyy hh:mm:ss a";
 
     //TODO constants for SQlite database
     //database name

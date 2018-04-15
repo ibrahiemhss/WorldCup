@@ -9,6 +9,8 @@ import android.util.Log;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
@@ -186,9 +188,15 @@ public class DBHelber extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-        String formattedNow = simpleDateFormat.format(new Date (System.currentTimeMillis()));
+
+
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
+        String formattedNow = simpleDateFormat.format(new  Date(System.currentTimeMillis()));
+
+
+
         values.put( ID, id );
         values.put( TYPE, type );
         values.put( HOME_TEAM, home_team );
@@ -211,7 +219,15 @@ public class DBHelber extends SQLiteOpenHelper {
 
         db.close();
     }
-
+    public String getTimeZoneByLocale(final String languageTag){
+         Locale locale = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            locale = Locale.forLanguageTag(languageTag);
+        }
+        final Calendar cal = Calendar.getInstance(locale);
+        final TimeZone timeZone = cal.getTimeZone();
+        return timeZone.getID();
+    }
     public Cursor getMatchesListbyvalue() {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM "+TB_MATCHES+"";

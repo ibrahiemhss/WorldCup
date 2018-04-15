@@ -7,17 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
 import static com.example.ibrahim.testworldcup.data.Contract.CITY;
 import static com.example.ibrahim.testworldcup.data.Contract.DATABASE_NAME;
 import static com.example.ibrahim.testworldcup.data.Contract.DATE;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_AWAY_TEAM;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_AWAY_TEAM_FLAG;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_CHANNELS;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_HOME_TEAM;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_HOME_TEAM_FLAG;
-import static com.example.ibrahim.testworldcup.data.Contract.FK_STADIUM;
 import static com.example.ibrahim.testworldcup.data.Contract.FLAG;
 import static com.example.ibrahim.testworldcup.data.Contract.GROUP_A;
 import static com.example.ibrahim.testworldcup.data.Contract.GROUP_B;
@@ -28,6 +29,8 @@ import static com.example.ibrahim.testworldcup.data.Contract.GROUP_F;
 import static com.example.ibrahim.testworldcup.data.Contract.GROUP_G;
 import static com.example.ibrahim.testworldcup.data.Contract.GROUP_H;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_RESULT;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
 import static com.example.ibrahim.testworldcup.data.Contract.ICON;
 import static com.example.ibrahim.testworldcup.data.Contract.ID;
 
@@ -35,11 +38,13 @@ import static com.example.ibrahim.testworldcup.data.Contract.ISO2;
 import static com.example.ibrahim.testworldcup.data.Contract.LAT;
 import static com.example.ibrahim.testworldcup.data.Contract.LNG;
 import static com.example.ibrahim.testworldcup.data.Contract.NAME;
+import static com.example.ibrahim.testworldcup.data.Contract.STADIUM;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_GROUPS;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_MATCHES;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_STADIUMS;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_TEAMES;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_TV_CHANNELS;
+import static com.example.ibrahim.testworldcup.data.Contract.TODAY;
 import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
 
 
@@ -99,18 +104,19 @@ public class DBHelber extends SQLiteOpenHelper {
                         AWAY_RESULT+" INTEGER , "+
                         DATE+" DATE , "+
                         FINISHED + " VARCHAR(10) NOT NULL  ," +
-                        FK_HOME_TEAM+" INTEGER, "+
-                        FK_AWAY_TEAM+" INTEGER, "+
-                        FK_HOME_TEAM_FLAG+" INTEGER, "+
-                        FK_AWAY_TEAM_FLAG+" INTEGER, "+
-                        FK_STADIUM+" INTEGER, "+
-                        FK_CHANNELS+" INTEGER, "+
-                        "FOREIGN KEY("+FK_HOME_TEAM+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
-                        "FOREIGN KEY("+FK_AWAY_TEAM+") REFERENCES "+TB_TEAMES+" ("+ID+") ,"+
-                        "FOREIGN KEY("+FK_HOME_TEAM_FLAG+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
-                       "FOREIGN KEY("+FK_AWAY_TEAM_FLAG+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
-                        "FOREIGN KEY("+FK_STADIUM+") REFERENCES "+TB_STADIUMS+" ("+ID+"), "+
-                        "FOREIGN KEY("+FK_CHANNELS+") REFERENCES "+TB_TV_CHANNELS+" ("+ID+")"+")";
+                        HOME_TEAM+" INTEGER, "+
+                        AWAY_TEAM+" INTEGER, "+
+                        HOME_TEAM_FLAG+" INTEGER, "+
+                        AWAY_TEAM_FLAG+" INTEGER, "+
+                        STADIUM+" INTEGER, "+
+                        CHANNELS+" INTEGER, "+
+                        TODAY+" DATE , "+
+        "FOREIGN KEY("+HOME_TEAM+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
+                        "FOREIGN KEY("+AWAY_TEAM+") REFERENCES "+TB_TEAMES+" ("+ID+") ,"+
+                        "FOREIGN KEY("+HOME_TEAM_FLAG+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
+                       "FOREIGN KEY("+AWAY_TEAM_FLAG+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
+                        "FOREIGN KEY("+STADIUM+") REFERENCES "+TB_STADIUMS+" ("+ID+"), "+
+                        "FOREIGN KEY("+CHANNELS+") REFERENCES "+TB_TV_CHANNELS+" ("+ID+")"+")";
 
 
 
@@ -180,17 +186,20 @@ public class DBHelber extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-     values.put( ID, id );
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        String formattedNow = simpleDateFormat.format(new Date (System.currentTimeMillis()));
+        values.put( ID, id );
         values.put( TYPE, type );
-        values.put( FK_HOME_TEAM, home_team );
-        values.put( FK_AWAY_TEAM, away_team );
+        values.put( HOME_TEAM, home_team );
+        values.put( AWAY_TEAM, away_team );
         values.put( HOME_RESULT, home_result );
         values.put( AWAY_RESULT, away_result );
-       values.put( DATE, date );
-        values.put( FK_STADIUM, stadium );
-        values.put( FK_CHANNELS, channels );
+        values.put( DATE, date );
+        values.put( STADIUM, stadium );
+        values.put( CHANNELS, channels );
         values.put( FINISHED, finished );
+        values.put(TODAY, formattedNow);
 
 
 
@@ -203,10 +212,55 @@ public class DBHelber extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Cursor getMatchesList() {
+    public Cursor getMatchesListbyvalue() {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM "+TB_MATCHES+"";
+        String sqlf = "SELECT m1.name as 'home_team', m2.name as 'away_team',\n" +
+                "       f1.flag as 'home_team_fag' , f2.flag as 'away_team_flag',\n" +
+                "       s1.city as 'city',s2.lat as 'lat' ,s3.lng  as 'lng',\n" +
+                "\t    tv.name as 'channels'\n" +
+                "FROM tb_matches as k\n" +
+                "INNER JOIN tb_teames AS m1 ON m1.id=k.home_team \n" +
+                "  and k.home_team  = 1\n" +
+                "INNER JOIN tb_teames AS m2 ON m2.id=k.away_team\n" +
+                "  and k.away_team  = 2\n" +
+                "  \n" +
+                "  INNER JOIN tb_teames AS f1 ON f1.id=k.home_team \n" +
+                "  and k.home_team  = 1\n" +
+                "INNER JOIN tb_teames AS f2 ON f2.id=k.away_team\n" +
+                "  and k.away_team  = 2\n" +
+                "  \n" +
+                "  INNER JOIN tb_stadiums AS s1 ON s1.id=k.stadium\n" +
+                "  INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
+                "  INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
+                "  and k.stadium  = 1\n" +
+                "  INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n" +
+                "  and k.channels  = 3";
 
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
+
+
+    public Cursor getMatchesList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT         \n" +
+                "k.type as 'type',\n" +
+                "k.date as 'date',\n" +
+                "k.finished as 'finished',\n" +
+                "m1.name as 'home_team', m2.name as 'away_team',\n" +
+                "f1.flag as 'home_team_flag' , f2.flag as 'away_team_flag',\n" +
+                "s1.city as 'city',s2.lat as 'lat' ,s3.lng  as 'lng',\n" +
+                "tv.name as 'channels'\n" +
+                "FROM tb_matches as k\n" +
+                "INNER JOIN tb_teames AS m1 ON m1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS m2 ON m2.id=k.away_team\n" +
+                "INNER JOIN tb_teames AS f1 ON f1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS f2 ON f2.id=k.away_team\n" +
+                "INNER JOIN tb_stadiums AS s1 ON s1.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
+                "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n";
         Cursor c = db.rawQuery(sql, null);
         return c;
     }

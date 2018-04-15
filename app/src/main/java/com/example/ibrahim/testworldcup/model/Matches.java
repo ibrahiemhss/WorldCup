@@ -1,61 +1,61 @@
 package com.example.ibrahim.testworldcup.model;
 
 public class Matches {
-    long id;
-    String away_team;
-    String home_team;
-    long away_result;
-    long home_result;
-    String date;
+    private   String type;
+    private String date;
+    private String finished;
+    private  String home_team;
+    private  String away_team;
+    private String home_team_flag;
+    private String away_team_flag;
+    private String city;
+    private String lat;
+    private String lng;
 
-
-    String stadium;
-    String finished;
-    String type;
-
-    public Matches (long id, String away_team, String home_team, long away_result, long home_result, String date, String stadium, String finished, String type) {
-        this.id = id;
-        this.away_team = away_team;
-        this.home_team = home_team;
-        this.away_result = away_result;
-        this.home_result = home_result;
+    public Matches (String type, String date, String finished, String home_team, String away_team, String home_team_flag, String away_team_flag, String city, String lat, String lng, String channels) {
+        this.type = type;
         this.date = date;
-        this.stadium = stadium;
         this.finished = finished;
+        this.home_team = home_team;
+        this.away_team = away_team;
+        this.home_team_flag = home_team_flag;
+        this.away_team_flag = away_team_flag;
+        this.city = city;
+        this.lat = lat;
+        this.lng = lng;
+        this.channels = channels;
+    }
+
+    public String getType () {
+        return type;
+    }
+
+    public void setType (String type) {
         this.type = type;
     }
 
-    public Matches (long aLong, String string, String string1, String string2, long aLong1, long aLong2, String string3, String string4, String string5, String string6) {
+    public String getDate () {
+        return date;
     }
 
-    public long getAway_result () {
-        return away_result;
+    public void setDate (String date) {
+        this.date = date;
     }
 
-    public void setAway_result (long away_result) {
-        this.away_result = away_result;
+    public String getFinished () {
+        return finished;
     }
 
-    public long getHome_result () {
-        return home_result;
+    public void setFinished (String finished) {
+        this.finished = finished;
     }
 
-    public void setHome_result (long home_result) {
-        this.home_result = home_result;
-    }
     public String getHome_team () {
         return home_team;
     }
 
     public void setHome_team (String home_team) {
         this.home_team = home_team;
-    }
-    public long getId () {
-        return id;
-    }
-
-    public void setId (long id) {
-        this.id = id;
     }
 
     public String getAway_team () {
@@ -66,45 +66,56 @@ public class Matches {
         this.away_team = away_team;
     }
 
-    public String getHome_teame () {
-        return home_team;
+    public String getHome_team_flag () {
+        return home_team_flag;
     }
 
-    public void setHome_teame (String home_teame) {
-        this.home_team = home_teame;
+    public void setHome_team_flag (String home_team_flag) {
+        this.home_team_flag = home_team_flag;
     }
 
-
-    public String getDate () {
-        return date;
+    public String getAway_team_flag () {
+        return away_team_flag;
     }
 
-    public void setDate (String date) {
-        this.date = date;
+    public void setAway_team_flag (String away_team_flag) {
+        this.away_team_flag = away_team_flag;
     }
 
-    public String getStadium () {
-        return stadium;
+    public String getCity () {
+        return city;
     }
 
-    public void setStadium (String stadium) {
-        this.stadium = stadium;
+    public void setCity (String city) {
+        this.city = city;
     }
 
-
-    public String getType () {
-        return type;
+    public String getLat () {
+        return lat;
     }
 
-    public void setType (String type) {
-        this.type = type;
+    public void setLat (String lat) {
+        this.lat = lat;
     }
 
-    public String getFinished () {
-        return finished;
+    public String getLng () {
+        return lng;
     }
 
-    public void setFinished (String finished) {
-        this.finished = finished;
+    public void setLng (String lng) {
+        this.lng = lng;
     }
+
+    public String getChannels () {
+        return channels;
+    }
+
+    public void setChannels (String channels) {
+        this.channels = channels;
+    }
+
+    private  String channels;
+
+
+
 }

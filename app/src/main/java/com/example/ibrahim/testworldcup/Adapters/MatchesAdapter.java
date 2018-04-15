@@ -19,8 +19,11 @@ import android.widget.TextView;
 
 import com.example.ibrahim.testworldcup.R;
 import com.example.ibrahim.testworldcup.model.Matches;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Administrator on 28/06/2017.
@@ -47,7 +50,7 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.list_matches, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate( R.layout.list_item_main, parent, false);
         view.setLayoutParams(new RecyclerView.LayoutParams( RecyclerView.LayoutParams.
                 MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
 
@@ -61,38 +64,18 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
         holder.away_team.setText(SH.getAway_team ());
        holder.home_team.setText(SH.getHome_team ());
-        holder.away_result.setText(String.valueOf (SH.getAway_result ()));
-        holder.home_result.setText(String.valueOf (SH.getHome_result ()));
+  //      holder.away_result.setText(String.valueOf (SH.getAway_result ()));
+    //    holder.home_result.setText(String.valueOf (SH.getHome_result ()));
         holder.date.setText(SH.getDate ());
-        holder.stadium.setText(SH.getStadium ());
+        holder.stadium.setText(SH.getCity ());
         //holder.finished.setText(SH.getAway_team ());
         //holder.type.setText(SH.getHome_team ());
+        Picasso.get().load(SH.getHome_team_flag ()).into(holder.home_team_flag);
+        Picasso.get().load(SH.getAway_team_flag ()).into(holder.away_team_flag);
 
 
 
 
-
-/*        ShapeDrawable.ShaderFactory sf = new ShapeDrawable.ShaderFactory() {
-            @Override
-            public Shader resize(int width, int height) {
-                LinearGradient lg = new LinearGradient(0, 0, 0, holder.lineMatches.getHeight(),
-                        new int[] {
-                                Color.GRAY,
-                                Color.WHITE,
-                                Color.LTGRAY,
-                                Color.DKGRAY }, //substitute the correct colors for these
-                        new float[] {
-                                0, 0.45f, 0.55f, 1 },
-                        Shader.TileMode.REPEAT);
-
-                return lg;
-            }
-        };
-        PaintDrawable p = new PaintDrawable();
-        p.setShape(new RectShape ());
-        p.setShaderFactory(sf);
-        p.setCornerRadius(70);*/
-     //   holder.lineMatches.setBackground((Drawable)p);
 
 
     }
@@ -113,14 +96,15 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
 
 
 
-        TextView away_team;
-        TextView home_team;
-        TextView date;
-        TextView stadium;
-        TextView away_result;
-        TextView home_result;
+    private     TextView away_team;
+        private TextView home_team;
+      private   TextView date;
+       private TextView stadium;
+       private TextView away_result;
+        private TextView home_result;
+        private CircleImageView home_team_flag,away_team_flag;
 
-        LinearLayout lin_result;
+       private LinearLayout lin_result;
 
         MyHolder (View view) {
             super (view);
@@ -130,6 +114,8 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MyHolder
             stadium = (TextView) view.findViewById (R.id.stadium_m);
             away_result = (TextView) view.findViewById (R.id.away_result);
             home_result = (TextView) view.findViewById (R.id.home_result);
+            home_team_flag = view.findViewById (R.id.home_team_flag);
+            away_team_flag = view.findViewById (R.id.away_team_flag);
 
             lin_result = view.findViewById (R.id.lin_result);
 

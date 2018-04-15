@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/home_team_img"
+                android:id="@+id/home_team_flag"
                 android:layout_width="60dp"
                 android:layout_height="65dp"
                 android:layout_weight="1"
@@ -87,7 +87,7 @@
                     android:gravity="bottom|center"
                     android:text="away team"/>
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/away_team_img"
+                    android:id="@+id/away_team_flag"
                     android:layout_width="60dp"
                     android:layout_height="65dp"
                     android:layout_weight="1"

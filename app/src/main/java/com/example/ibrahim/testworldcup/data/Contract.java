@@ -14,19 +14,17 @@ public class Contract {
     public static final String ID="id";
     public static final String NAME="name";
     public static final String TYPE="type";
-    public static final String FK_STADIUM="stadium";
+    public static final String STADIUM="stadium";
     public static final String HOME_TEAM="home_team";
     public static final String AWAY_TEAM="away_team";
     public static final String HOME_RESULT="home_result";
     public static final String AWAY_RESULT="away_result";
     public static final String DATE="date";
-    public static final String FK_CHANNELS="channels";
+    public static final String CHANNELS="channels";
     public static final String FINISHED="finished";
-    public static final String FK_NAME="fk_name";
-    public static final String FK_HOME_TEAM="home_team";
-    public static final String FK_AWAY_TEAM="away_team";
-    public static final String FK_HOME_TEAM_FLAG="home_team_flag";
-    public static final String FK_AWAY_TEAM_FLAG="away_team_flag";
+    public static final String TODAY="today";
+    public static final String HOME_TEAM_FLAG="home_team_flag";
+    public static final String AWAY_TEAM_FLAG="away_team_flag";
 
 
 

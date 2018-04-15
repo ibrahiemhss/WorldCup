@@ -18,12 +18,17 @@ import java.util.List;
 
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
 import static com.example.ibrahim.testworldcup.data.Contract.CITY;
 import static com.example.ibrahim.testworldcup.data.Contract.DATE;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
 import static com.example.ibrahim.testworldcup.data.Contract.ID;
+import static com.example.ibrahim.testworldcup.data.Contract.LAT;
+import static com.example.ibrahim.testworldcup.data.Contract.LNG;
 import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDbHelber=new DBHelber( this );
         matches=new ArrayList<> ();
-    /*    RV = (RecyclerView) findViewById( R.id.RV_main);
+        RV = (RecyclerView) findViewById( R.id.RV_main);
         RV.setHasFixedSize(true);
         recyclerViewlayoutManager = new LinearLayoutManager (this);
         RV.setLayoutManager(recyclerViewlayoutManager);
@@ -65,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent (MainActivity.this, MatchesActiviy.class);
                 startActivity (intent);
             }
-        });*/
+        });
 
     }
     private void displayOfline(){
@@ -74,15 +79,17 @@ public class MainActivity extends AppCompatActivity {
         while (cursor.moveToNext()) {
             Matches matches2;
             matches2 = new Matches(
-                    cursor.getLong ( cursor.getColumnIndex( ID )),
+                    cursor.getString( cursor.getColumnIndex( TYPE ) ),
+                   cursor.getString( cursor.getColumnIndex( DATE )),
+                    cursor.getString( cursor.getColumnIndex( FINISHED ) ),
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM ) ),
                     cursor.getString( cursor.getColumnIndex( AWAY_TEAM ) ),
-                   cursor.getString( cursor.getColumnIndex( HOME_TEAM )),
-                    cursor.getLong( cursor.getColumnIndex( AWAY_RESULT ) ),
-                    cursor.getLong( cursor.getColumnIndex( HOME_RESULT ) ),
-                    cursor.getString( cursor.getColumnIndex( DATE ) ),
-                    cursor.getString( cursor.getColumnIndex( CITY ) ),
-                    cursor.getString ( cursor.getColumnIndex( FINISHED )),
-                    cursor.getString( cursor.getColumnIndex( TYPE ) ));
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( AWAY_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( CITY )),
+                    cursor.getString ( cursor.getColumnIndex( LAT )),
+                    cursor.getString ( cursor.getColumnIndex( LNG )),
+                    cursor.getString( cursor.getColumnIndex( CHANNELS ) ));
 
             matches.add( matches2 );
 

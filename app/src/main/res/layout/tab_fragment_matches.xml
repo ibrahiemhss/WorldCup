@@ -8,7 +8,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:layout_height="match_parent"
-        android:id="@+id/RV_matches">
+        android:id="@+id/RV_coming">
 
     </android.support.v7.widget.RecyclerView>
 </RelativeLayout>

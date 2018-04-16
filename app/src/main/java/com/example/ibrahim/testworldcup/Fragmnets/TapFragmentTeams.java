@@ -32,7 +32,7 @@ public class TapFragmentTeams extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_fragment_teams, container, false);
 
-        database = FirebaseDatabase.getInstance();
+      /*  database = FirebaseDatabase.getInstance();
         myRef=database.getReference ();
         list=new ArrayList<> ();
 
@@ -62,7 +62,7 @@ public class TapFragmentTeams extends Fragment {
 
             }
         });
-
+*/
 
 
         return rootView;

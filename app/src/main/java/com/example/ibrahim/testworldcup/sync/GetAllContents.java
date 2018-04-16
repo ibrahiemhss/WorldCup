@@ -211,11 +211,12 @@ public class GetAllContents {
                          away_result= snapshot.child("away_result").getValue(long.class);
                     }
                     String date = snapshot.child("date").getValue(String.class);
+                    String day = snapshot.child("day").getValue(String.class);
                     long stadium= snapshot.child("stadium").getValue(long.class);
                    long channels=3;// snapshot.child("channels").getValue(long.class);
                     boolean finished = snapshot.child("finished").getValue(boolean.class);
 
-                    mDbHelber.addMathesList (  id, type,  home_team,away_team,  home_result, away_result, date,  stadium, channels,  finished);
+                    mDbHelber.addMathesList (  id, type,  home_team,away_team,  home_result, away_result, date,day,  stadium, channels,  finished);
                     Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + away_team);
                 }
 

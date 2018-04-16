@@ -17,6 +17,18 @@ import com.example.ibrahim.testworldcup.model.Matches;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
+import static com.example.ibrahim.testworldcup.data.Contract.CITY;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.LAT;
+import static com.example.ibrahim.testworldcup.data.Contract.LNG;
+import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
+
 
 public class TabFragmentComing extends Fragment {
     private List<Matches> matches ;
@@ -31,7 +43,7 @@ public class TabFragmentComing extends Fragment {
 
         mDbHelber=new DBHelber( getActivity () );
         matches=new ArrayList<> ();
-        RV = (RecyclerView) rootView.findViewById( R.id.RV_matches);
+        RV = (RecyclerView) rootView.findViewById( R.id.RV_coming);
         RV.setHasFixedSize(true);
         recyclerViewlayoutManager = new LinearLayoutManager (getActivity ());
         RV.setLayoutManager(recyclerViewlayoutManager);
@@ -39,28 +51,28 @@ public class TabFragmentComing extends Fragment {
         RV.setAdapter(recyclerViewadapter);
         recyclerViewadapter.notifyDataSetChanged();
         displayOfline();
-return rootView;
+        return rootView;
 
     }
     private void displayOfline(){
         matches.clear();
-/*
-        Cursor cursor = mDbHelber.getMatchesList( );
+        Cursor cursor = mDbHelber.getCommingMatches( );
         while (cursor.moveToNext()) {
             Matches matches2;
             matches2 = new Matches(
-                    cursor.getString( cursor.getColumnIndex( TEAM_A )),
-                    cursor.getString( cursor.getColumnIndex( TEAM_B ) )
-                *//*    cursor.getString( cursor.getColumnIndex( DATE ))
-                    cursor.getString( cursor.getColumnIndex( IMAGE_FOR_TEAM_A ) ),
-                    cursor.getString( cursor.getColumnIndex( IMAGE_FOR_TEAM_B ) ),
-                    cursor.getString( cursor.getColumnIndex( STADIUM ) ),
-                    cursor.getString( cursor.getColumnIndex( FINISHED ))
-                  *//*
-            );
-
+                    cursor.getString( cursor.getColumnIndex( TYPE ) ),
+                    cursor.getString( cursor.getColumnIndex( DATE )),
+                    cursor.getString( cursor.getColumnIndex( FINISHED ) ),
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM ) ),
+                    cursor.getString( cursor.getColumnIndex( AWAY_TEAM ) ),
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( AWAY_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( CITY )),
+                    cursor.getString ( cursor.getColumnIndex( LAT )),
+                    cursor.getString ( cursor.getColumnIndex( LNG )),
+                    cursor.getString( cursor.getColumnIndex( CHANNELS ) ));
 
             matches.add( matches2 );
 
-        }*/
+        }
 }}

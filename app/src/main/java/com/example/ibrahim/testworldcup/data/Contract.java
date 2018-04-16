@@ -4,8 +4,9 @@ public class Contract {
 
     public static final String AUTHORITY = "http://worldcupapp2018.000webhostapp.com/";
     public static final String URL_SYNC = "http://worldcupapp2018.000webhostapp.com/getMatches.php";
+    public static final String DATE_FORMAT_NOW = "yyyy-MM-dd";
 
-    public static final String DATE_FORMATING = "dd-M-yyyy hh:mm:ss a";
+    public static final String DATE_FORMATING = "yyyy-MM-dd'T'HH:mm:ssz";
 
     //TODO constants for SQlite database
     //database name
@@ -21,6 +22,7 @@ public class Contract {
     public static final String HOME_RESULT="home_result";
     public static final String AWAY_RESULT="away_result";
     public static final String DATE="date";
+
     public static final String CHANNELS="channels";
     public static final String FINISHED="finished";
     public static final String TODAY="today";
@@ -57,6 +59,7 @@ public class Contract {
     public static final String GROUP_H="h";
 
     public static final String TB_MATCHES="tb_matches";
+    public static final String DAY="day";
 
     public static final String TB_KNOCKOUT="tb_knockout";
     public static final String ROUND_16="round_16";

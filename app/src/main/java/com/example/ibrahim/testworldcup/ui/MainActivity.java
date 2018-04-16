@@ -1,32 +1,33 @@
 package com.example.ibrahim.testworldcup.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import com.example.ibrahim.testworldcup.Adapters.MatchesAdapter;
 import com.example.ibrahim.testworldcup.R;
 import com.example.ibrahim.testworldcup.data.DBHelber;
 import com.example.ibrahim.testworldcup.model.Matches;
 import com.example.ibrahim.testworldcup.sync.GetAllContents;
+import java.util.Calendar;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
 import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
 import static com.example.ibrahim.testworldcup.data.Contract.CITY;
 import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE_FORMAT_NOW;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
-import static com.example.ibrahim.testworldcup.data.Contract.HOME_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
-import static com.example.ibrahim.testworldcup.data.Contract.ID;
 import static com.example.ibrahim.testworldcup.data.Contract.LAT;
 import static com.example.ibrahim.testworldcup.data.Contract.LNG;
 import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
@@ -46,7 +47,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-       getAllContents=new GetAllContents (this);
+
+
+
+        getAllContents=new GetAllContents (this);
         getAllContents.getFBStaduims (this);
         getAllContents.getFBSTvChannel (this);
         getAllContents.getFBSTeams (this);
@@ -63,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         RV.setAdapter(recyclerViewadapter);
         recyclerViewadapter.notifyDataSetChanged();
         displayOfline();
-
         findViewById (R.id.BtnGoMatches).setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
@@ -74,8 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void displayOfline(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat(DATE_FORMAT_NOW);
+        String strDate =  mdformat.format(calendar.getTime());
+        Log.v(TAG,"naw aday:\n"+strDate);
+
         matches.clear();
-        Cursor cursor = mDbHelber.getMatchesList( );
+        Cursor cursor = mDbHelber.getMatchesByDayList(strDate.trim () );
         while (cursor.moveToNext()) {
             Matches matches2;
             matches2 = new Matches(
@@ -95,4 +103,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
 }

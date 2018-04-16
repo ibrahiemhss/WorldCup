@@ -72,8 +72,8 @@ public class MatchesActiviy extends AppCompatActivity {
 */
 
        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Mathes"));
-        tabLayout.addTab(tabLayout.newTab().setText(" AllData"));
+        tabLayout.addTab(tabLayout.newTab().setText("Coming"));
+        tabLayout.addTab(tabLayout.newTab().setText(" Finished"));
         tabLayout.addTab(tabLayout.newTab().setText("Teams"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 

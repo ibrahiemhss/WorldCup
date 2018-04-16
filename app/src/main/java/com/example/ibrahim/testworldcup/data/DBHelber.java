@@ -20,6 +20,8 @@ import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
 import static com.example.ibrahim.testworldcup.data.Contract.CITY;
 import static com.example.ibrahim.testworldcup.data.Contract.DATABASE_NAME;
 import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE_FORMATING;
+import static com.example.ibrahim.testworldcup.data.Contract.DAY;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
 import static com.example.ibrahim.testworldcup.data.Contract.FLAG;
 import static com.example.ibrahim.testworldcup.data.Contract.GROUP_A;
@@ -105,6 +107,7 @@ public class DBHelber extends SQLiteOpenHelper {
                         HOME_RESULT+" INTEGER , "+
                         AWAY_RESULT+" INTEGER , "+
                         DATE+" DATE , "+
+                        DAY+" DATE , "+
                         FINISHED + " VARCHAR(10) NOT NULL  ," +
                         HOME_TEAM+" INTEGER, "+
                         AWAY_TEAM+" INTEGER, "+
@@ -184,14 +187,14 @@ public class DBHelber extends SQLiteOpenHelper {
         db.close();
     }
     public void addMathesList(long id,  String type, long home_team,
-                              long away_team, long home_result,long away_result,String date, long stadium,long channels, boolean finished) {
+                              long away_team, long home_result,long away_result,String date,String day, long stadium,long channels, boolean finished) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
 
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMATING);
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String formattedNow = simpleDateFormat.format(new  Date(System.currentTimeMillis()));
 
@@ -204,6 +207,7 @@ public class DBHelber extends SQLiteOpenHelper {
         values.put( HOME_RESULT, home_result );
         values.put( AWAY_RESULT, away_result );
         values.put( DATE, date );
+        values.put( DAY, day );
         values.put( STADIUM, stadium );
         values.put( CHANNELS, channels );
         values.put( FINISHED, finished );
@@ -258,7 +262,7 @@ public class DBHelber extends SQLiteOpenHelper {
     }
 
 
-    public Cursor getMatchesList() {
+    public Cursor getMatchesByDayList(String now) {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT         \n" +
                 "k.type as 'type',\n" +
@@ -276,7 +280,55 @@ public class DBHelber extends SQLiteOpenHelper {
                 "INNER JOIN tb_stadiums AS s1 ON s1.id=k.stadium\n" +
                 "INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
                 "INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
-                "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n";
+                "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n" +
+                " and k.day  ='"+now+"' ";
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
+
+    public Cursor getCommingMatches() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT         \n" +
+                "k.type as 'type',\n" +
+                "k.date as 'date',\n" +
+                "k.finished as 'finished',\n" +
+                "m1.name as 'home_team', m2.name as 'away_team',\n" +
+                "f1.flag as 'home_team_flag' , f2.flag as 'away_team_flag',\n" +
+                "s1.city as 'city',s2.lat as 'lat' ,s3.lng  as 'lng',\n" +
+                "tv.name as 'channels'\n" +
+                "FROM tb_matches as k\n" +
+                "INNER JOIN tb_teames AS m1 ON m1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS m2 ON m2.id=k.away_team\n" +
+                "INNER JOIN tb_teames AS f1 ON f1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS f2 ON f2.id=k.away_team\n" +
+                "INNER JOIN tb_stadiums AS s1 ON s1.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
+                "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n" +
+                " and k.finished  = 0";
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
+    public Cursor getFinishedMatches() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT         \n" +
+                "k.type as 'type',\n" +
+                "k.date as 'date',\n" +
+                "k.finished as 'finished',\n" +
+                "m1.name as 'home_team', m2.name as 'away_team',\n" +
+                "f1.flag as 'home_team_flag' , f2.flag as 'away_team_flag',\n" +
+                "s1.city as 'city',s2.lat as 'lat' ,s3.lng  as 'lng',\n" +
+                "tv.name as 'channels'\n" +
+                "FROM tb_matches as k\n" +
+                "INNER JOIN tb_teames AS m1 ON m1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS m2 ON m2.id=k.away_team\n" +
+                "INNER JOIN tb_teames AS f1 ON f1.id=k.home_team \n" +
+                "INNER JOIN tb_teames AS f2 ON f2.id=k.away_team\n" +
+                "INNER JOIN tb_stadiums AS s1 ON s1.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
+                "INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
+                "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n" +
+                " and k.finished  =1 ";
         Cursor c = db.rawQuery(sql, null);
         return c;
     }

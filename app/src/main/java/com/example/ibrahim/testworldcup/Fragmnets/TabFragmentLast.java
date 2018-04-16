@@ -1,5 +1,6 @@
 package com.example.ibrahim.testworldcup.Fragmnets;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,66 +9,69 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ibrahim.testworldcup.Adapters.StadiumsAdapter;
-import com.example.ibrahim.testworldcup.Adapters.TeamAdapter;
+import com.example.ibrahim.testworldcup.Adapters.MatchesAdapter;
 import com.example.ibrahim.testworldcup.R;
-import com.example.ibrahim.testworldcup.model.Stadiums;
-import com.example.ibrahim.testworldcup.model.Teams;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.ibrahim.testworldcup.data.DBHelber;
+import com.example.ibrahim.testworldcup.model.Matches;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.CHANNELS;
+import static com.example.ibrahim.testworldcup.data.Contract.CITY;
+import static com.example.ibrahim.testworldcup.data.Contract.DATE;
+import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
+import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.LAT;
+import static com.example.ibrahim.testworldcup.data.Contract.LNG;
+import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
+
 public class TabFragmentLast  extends Fragment {
-    FirebaseDatabase database;
-    DatabaseReference myRef ;
-    List<Stadiums> list;
-    RecyclerView recycle;
+    private List<Matches> matches ;
     RecyclerView.LayoutManager recyclerViewlayoutManager;
     RecyclerView.Adapter  recyclerViewadapter;
+    DBHelber mDbHelber;
+    RecyclerView RV;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_fragment_last, container, false);
 
-        database = FirebaseDatabase.getInstance();
-        myRef=database.getReference ();
-        list=new ArrayList<> ();
-
-        recycle = (RecyclerView)rootView. findViewById( R.id.RV_Test);
-        recycle.setHasFixedSize(true);
+        mDbHelber=new DBHelber( getActivity () );
+        matches=new ArrayList<> ();
+        RV = (RecyclerView) rootView.findViewById( R.id.RV_finished);
+        RV.setHasFixedSize(true);
         recyclerViewlayoutManager = new LinearLayoutManager (getActivity ());
-        recycle.setLayoutManager(recyclerViewlayoutManager);
-        recyclerViewadapter = new StadiumsAdapter (list,getActivity () );
-
-        myRef.child ("stadiums").addValueEventListener (new ValueEventListener () {
-
-            @Override
-            public void onDataChange (DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot :dataSnapshot.getChildren ()){
-                    Stadiums stadiums=snapshot.getValue (Stadiums.class);
-                    list.add (stadiums);
-                    recycle.setAdapter(recyclerViewadapter);
-                    recyclerViewadapter.notifyDataSetChanged ();
-
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled (DatabaseError databaseError) {
-
-            }
-        });
-
-
-
+        RV.setLayoutManager(recyclerViewlayoutManager);
+        recyclerViewadapter = new MatchesAdapter (matches,getActivity ());
+        RV.setAdapter(recyclerViewadapter);
+        recyclerViewadapter.notifyDataSetChanged();
+        displayOfline();
         return rootView;
 
-
     }
+    private void displayOfline(){
+        matches.clear();
+        Cursor cursor = mDbHelber.getFinishedMatches ( );
+        while (cursor.moveToNext()) {
+            Matches matches2;
+            matches2 = new Matches(
+                    cursor.getString( cursor.getColumnIndex( TYPE ) ),
+                    cursor.getString( cursor.getColumnIndex( DATE )),
+                    cursor.getString( cursor.getColumnIndex( FINISHED ) ),
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM ) ),
+                    cursor.getString( cursor.getColumnIndex( AWAY_TEAM ) ),
+                    cursor.getString( cursor.getColumnIndex( HOME_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( AWAY_TEAM_FLAG ) ),
+                    cursor.getString ( cursor.getColumnIndex( CITY )),
+                    cursor.getString ( cursor.getColumnIndex( LAT )),
+                    cursor.getString ( cursor.getColumnIndex( LNG )),
+                    cursor.getString( cursor.getColumnIndex( CHANNELS ) ));
+
+            matches.add( matches2 );
+
+        }}
 }

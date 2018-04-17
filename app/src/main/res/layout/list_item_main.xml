@@ -38,8 +38,9 @@
                     android:layout_height="match_parent"
                     android:id="@+id/home_team"
                     android:layout_weight="1"
+                    android:layout_marginRight="10dp"
+                    android:gravity="start|center"
                     android:textColor="@color/colorWhite"
-                    android:gravity="center"
                     android:text="home team"/>
                 <TextView
                     android:id="@+id/not_played"
@@ -51,14 +52,18 @@
                 <LinearLayout
                     android:id="@+id/lin_result"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:visibility="visible"
                     android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorWhite"
                     android:id="@+id/home_result"
+                    android:gravity="end|bottom"
                     android:layout_weight="1"
                     android:text="0"/>
                 <TextView
@@ -82,8 +87,8 @@
                     android:layout_height="match_parent"
                     android:id="@+id/away_team"
                     android:layout_weight="1"
+                    android:gravity="end|center"
                     android:textColor="@color/colorWhite"
-                    android:gravity="center"
                     android:text="away team"/>
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/away_team_flag"

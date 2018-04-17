@@ -15,4 +15,5 @@
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">#FF4081</item>
     </style>
+
 </resources>

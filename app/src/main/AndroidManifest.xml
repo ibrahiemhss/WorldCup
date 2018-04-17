@@ -3,7 +3,7 @@
     package="com.example.ibrahim.testworldcup">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-/////////////////////////
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +22,15 @@
             android:name=".ui.MatchesActiviy"
             android:theme="@style/AppThemeNoActionBar"
             ></activity>
+
+        <activity
+            android:name=".dialoges.Location"
+            android:theme="@style/AppThemeNoActionBar" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_api_key"/>
+
     </application>
 
 </manifest>

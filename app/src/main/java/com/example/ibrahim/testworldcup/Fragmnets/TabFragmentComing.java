@@ -25,6 +25,7 @@ import static com.example.ibrahim.testworldcup.data.Contract.DATE;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
+import static com.example.ibrahim.testworldcup.data.Contract.ID;
 import static com.example.ibrahim.testworldcup.data.Contract.LAT;
 import static com.example.ibrahim.testworldcup.data.Contract.LNG;
 import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
@@ -41,7 +42,7 @@ public class TabFragmentComing extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.tab_fragment_matches, container, false);
 
-        mDbHelber=new DBHelber( getActivity () );
+        mDbHelber=new DBHelber ( getActivity () );
         matches=new ArrayList<> ();
         RV = (RecyclerView) rootView.findViewById( R.id.RV_coming);
         RV.setHasFixedSize(true);
@@ -60,6 +61,7 @@ public class TabFragmentComing extends Fragment {
         while (cursor.moveToNext()) {
             Matches matches2;
             matches2 = new Matches(
+                    cursor.getLong ( cursor.getColumnIndex( ID ) ),
                     cursor.getString( cursor.getColumnIndex( TYPE ) ),
                     cursor.getString( cursor.getColumnIndex( DATE )),
                     cursor.getString( cursor.getColumnIndex( FINISHED ) ),

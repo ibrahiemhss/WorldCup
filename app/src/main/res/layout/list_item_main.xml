@@ -5,42 +5,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginTop="4dp"
+
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
+        android:layout_height="210dp"
+
+
         android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:background="@drawable/matches">
+        android:background="@drawable/matches12" >
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:background="@drawable/transparent_light_green"
+            android:layout_height="wrap_content"
+
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/home_team_flag"
-                android:layout_width="60dp"
-                android:layout_height="65dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:layout_weight="1"
                 android:src="@mipmap/ic_launcher"
-                app:civ_border_width="0dp" />
+                app:civ_border_width="0dp"
+                />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/home_team"
                     android:layout_weight="1"
                     android:textColor="@color/colorWhite"
-                    android:gravity="bottom|center"
+                    android:gravity="center"
                     android:text="home team"/>
                 <TextView
                     android:id="@+id/not_played"
@@ -84,101 +83,112 @@
                     android:id="@+id/away_team"
                     android:layout_weight="1"
                     android:textColor="@color/colorWhite"
-                    android:gravity="bottom|center"
+                    android:gravity="center"
                     android:text="away team"/>
                 <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/away_team_flag"
-                    android:layout_width="60dp"
-                    android:layout_height="65dp"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:layout_weight="1"
                     android:layout_gravity="end"
                     android:src="@mipmap/ic_launcher"
                     app:civ_border_width="0dp" />
         </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:orientation="vertical"
-                android:layout_marginLeft="15dp"
-                android:padding="8dp"
-                android:layout_marginRight="15dp"
-                android:background="@drawable/transparent_dark_green">
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_location"/>
-                <TextView
-                    android:id="@+id/matche_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
-                    android:text="location"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    />
-</LinearLayout>
+                android:layout_marginTop="10dp">
+
                 <LinearLayout
+                    android:id="@+id/matche_location"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_date"/>
+                        android:background="@drawable/ic_location" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="location"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_date" />
+
                     <TextView
                         android:id="@+id/date_m"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
-                        android:text="Date "
                         android:layout_weight="1"
+                        android:text="Date "
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/colorWhite" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_live_tv"/>
+                        android:background="@drawable/ic_live_tv" />
+
                     <TextView
                         android:id="@+id/channels"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
-                        android:text="live "
                         android:layout_weight="1"
+                        android:text="live "
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/colorWhite" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_stadium"/>
+                        android:background="@drawable/ic_stadium" />
+
                     <TextView
                         android:id="@+id/stadium_m"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
-                        android:text="stadium "
                         android:layout_weight="1"
+                        android:text="stadium "
                         android:textAlignment="center"
-                        />
+                        android:textColor="@color/colorWhite" />
                 </LinearLayout>
 
 
             </LinearLayout>
 
-            </LinearLayout>
-
         </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

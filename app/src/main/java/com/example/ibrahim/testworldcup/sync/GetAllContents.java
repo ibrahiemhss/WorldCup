@@ -58,64 +58,7 @@ public class GetAllContents {
 
     }
 
-    /*   public void getMatches(Context context) {
 
-           mApiService.GetMatches ("yes")
-                   .enqueue(new Callback<ResponseBody>() {
-                       @Override
-                       public void onResponse(Call<ResponseBody> call, retrofit2.Response<ResponseBody> response) {
-                           if (response.isSuccessful()){
-
-                               try {
-                                   String remoteResponse=response.body().string();
-
-                                   Log.d("JSONDR", remoteResponse);
-
-                                   JSONObject jsonRESULTS = new JSONObject(remoteResponse);
-                                   if (jsonRESULTS.getString("error").equals("false")){
-                                   String TeamA = jsonRESULTS.getString("TeamA");
-                                     String TeamB = jsonRESULTS.getString("TeamB");
-                             //          JSONObject user = jsonRESULTS.getJSONObject("matches");
-                                     //  String TeamA = user.getString("TeamA");
-                                     //  String TeamB = user.getString("TeamB");
-
-                             //  String TeamA = jsonRESULTS.getJSONObject("matches").getString("TeamA");
-                                //  String TeamB = jsonRESULTS.getJSONObject("matches").getString("TeamB");
-                                       String error_message = jsonRESULTS.getString("error_msg");
-                                       mDbHelber.addMathesList ( TeamA, TeamB);
-
-                                       Log.i("TeamssValue", "["+ TeamA+"]");
-                                      // Log.e("debuguser", name);
-                                     //  Log.v("TeamssValue", "TeamA> "+TeamA );
-
-                                       Log.v("TeamssValue", "TeamA > "+TeamA );
-
-                                       Log.e("debug", "succeess: ERROR > "+error_message );
-                                   } else {
-                                       // Jika login gagal
-                                       Log.e("debug", "onFailure: ERROR > " );
-                                       String error_message = jsonRESULTS.getString("error_msg");
-
-                                       Log.e("debug", "noAcount: ERROR > "+error_message );
-
-                                   }
-                               } catch (JSONException e) {
-                                   e.printStackTrace();
-                               } catch (IOException e) {
-                                   e.printStackTrace();
-                               }
-                           } else {
-                           }
-                       }
-
-                       @Override
-                       public void onFailure(Call<ResponseBody> call, Throwable t) {
-                           Log.e("debug", "onFailure: ERROR > " + t.toString());
-                       }
-                   });
-
-       }
-   */
     public void getFBStaduims(Context context) {
         myRef.child ("stadiums").child ("stadiums").addValueEventListener (new ValueEventListener () {
 
@@ -125,10 +68,11 @@ public class GetAllContents {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     long id= snapshot.child("id").getValue(long.class);
                     String city = snapshot.child("city").getValue(String.class);
+                    String ar_city = snapshot.child("ar_city").getValue(String.class);
                     double lat = snapshot.child("lat").getValue(double.class);
                     double lng = snapshot.child("lng").getValue(double.class);
                     String name= snapshot.child("name").getValue(String.class);
-                    mDbHelber.addStadiumsList(id,  city, lat, lng, name);
+                    mDbHelber.addStadiumsList(id,  city,ar_city, lat, lng, name);
                     Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + city);
                 }
 
@@ -152,7 +96,6 @@ public class GetAllContents {
                     long id= snapshot.child("id").getValue(long.class);
                     String name = snapshot.child("name").getValue(String.class);
                     String icon = snapshot.child("icon").getValue(String.class);
-
                     mDbHelber.addChannelsList (id,  name, icon);
                     Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + name);
                 }
@@ -175,13 +118,46 @@ public class GetAllContents {
             public void onDataChange (DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    long id= snapshot.child("id").getValue(long.class);
-                    String name = snapshot.child("name").getValue(String.class);
-                    String flag = snapshot.child("flag").getValue(String.class);
-                    String iso2 = snapshot.child("iso2").getValue(String.class);
 
-                    mDbHelber.addTeamsList (id,  name,flag, iso2);
-                    Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + name);
+                        long id = snapshot.child ("id").getValue (long.class);
+                    long po = snapshot.child ("po").getValue (long.class);
+                    long res = snapshot.child ("res").getValue (long.class);
+                        String name = snapshot.child ("name").getValue (String.class);
+                    String ar_name = snapshot.child ("ar_name").getValue (String.class);
+
+                    String flag = snapshot.child ("flag").getValue (String.class);
+                        String iso2 = snapshot.child ("iso2").getValue (String.class);
+
+                        mDbHelber.addTeamsList (id,po,res,  name,ar_name,flag, iso2);
+                        Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + name);
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled (DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void getFBSGroups(Context context) {
+        myRef.child ("group").child ("group").addValueEventListener (new ValueEventListener () {
+
+            @Override
+            public void onDataChange (DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    long id= snapshot.child("id").getValue(long.class);
+                    String name= snapshot.child("name").getValue(String.class);
+                    long t1= snapshot.child("team1").getValue(long.class);
+                    long t2= snapshot.child("team2").getValue(long.class);
+                    long t3= snapshot.child("team3").getValue(long.class);
+                    long t4= snapshot.child("team4").getValue(long.class);
+
+
+                    mDbHelber.addGroupList ( id,  name, t1, t2, t3, t4);
                 }
 
             }
@@ -201,7 +177,7 @@ public class GetAllContents {
             public void onDataChange (DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    long id= snapshot.child("id").getValue(long.class);
+                   long id= snapshot.child("id").getValue(long.class);
                     long nam= snapshot.child("name").getValue(long.class);
 
                     String type = snapshot.child("type").getValue(String.class);
@@ -213,13 +189,13 @@ public class GetAllContents {
                         away_result= snapshot.child("away_result").getValue(long.class);
                     }
                     String date = snapshot.child("date").getValue(String.class);
-                    String day = snapshot.child("day").getValue(String.class);
+                    String day = snapshot.child("today").getValue(String.class);
                     long stadium= snapshot.child("stadium").getValue(long.class);
                     long channels=3;// snapshot.child("channels").getValue(long.class);
                     boolean finished = snapshot.child("finished").getValue(boolean.class);
 
                     mDbHelber.addMathesList (  id, nam,type,  home_team,away_team,  home_result, away_result, date,day,  stadium, channels,  finished);
-                    Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + away_team);
+                //    Log.d (TAG, "value from firbaser : \n id" + id + "\n city :" + away_team);
                 }
 
             }

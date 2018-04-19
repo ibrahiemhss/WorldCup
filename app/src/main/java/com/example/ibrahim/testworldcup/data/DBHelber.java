@@ -13,6 +13,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static com.example.ibrahim.testworldcup.data.Contract.AR_CITY;
+import static com.example.ibrahim.testworldcup.data.Contract.AR_NAME;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM;
 import static com.example.ibrahim.testworldcup.data.Contract.AWAY_TEAM_FLAG;
@@ -24,14 +26,6 @@ import static com.example.ibrahim.testworldcup.data.Contract.DATE_FORMATING;
 import static com.example.ibrahim.testworldcup.data.Contract.DAY;
 import static com.example.ibrahim.testworldcup.data.Contract.FINISHED;
 import static com.example.ibrahim.testworldcup.data.Contract.FLAG;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_A;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_B;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_C;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_D;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_E;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_F;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_G;
-import static com.example.ibrahim.testworldcup.data.Contract.GROUP_H;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM;
 import static com.example.ibrahim.testworldcup.data.Contract.HOME_TEAM_FLAG;
@@ -41,13 +35,18 @@ import static com.example.ibrahim.testworldcup.data.Contract.ISO2;
 import static com.example.ibrahim.testworldcup.data.Contract.LAT;
 import static com.example.ibrahim.testworldcup.data.Contract.LNG;
 import static com.example.ibrahim.testworldcup.data.Contract.NAME;
-import static com.example.ibrahim.testworldcup.data.Contract.RSULT;
+import static com.example.ibrahim.testworldcup.data.Contract.POINT;
+import static com.example.ibrahim.testworldcup.data.Contract.RESULT;
 import static com.example.ibrahim.testworldcup.data.Contract.STADIUM;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_GROUPS;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_MATCHES;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_STADIUMS;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_TEAMES;
 import static com.example.ibrahim.testworldcup.data.Contract.TB_TV_CHANNELS;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM1;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM2;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM3;
+import static com.example.ibrahim.testworldcup.data.Contract.TEAM4;
 import static com.example.ibrahim.testworldcup.data.Contract.TODAY;
 import static com.example.ibrahim.testworldcup.data.Contract.TYPE;
 
@@ -62,6 +61,7 @@ public class DBHelber extends SQLiteOpenHelper {
             "CREATE TABLE " + TB_STADIUMS + "(" +
                     ID + " INTEGER PRIMARY KEY , " +
                     CITY + " VARCHAR(100) NOT NULL, " +
+                    AR_CITY + " VARCHAR(100) NOT NULL, " +
                     NAME + " VARCHAR(100) NOT NULL, " +
                     LAT + " VARCHAR(100) NOT NULL, " +
                     LNG + " VARCHAR(100) NOT NULL " +")";
@@ -78,22 +78,24 @@ public class DBHelber extends SQLiteOpenHelper {
     final String CREATE_TB_TEAMS =
             "CREATE TABLE " + TB_TEAMES + "(" +
                     ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                    RSULT+ " INTEGER null , " +
-                    NAME + " VARCHAR(100) NOT NULL  ,  " +
-                    FLAG + " VARCHAR(400) NOT NULL  ,  " +
+                    NAME + " VARCHAR(20) NOT NULL, " +
+                    AR_NAME + " VARCHAR(20) NOT NULL, " +
+                    RESULT+ " INTEGER NOT NULL , " +
+                    POINT+ " INTEGER NOT NULL , " +
+                    FLAG + " VARCHAR(400)   NULL  ,  " +
                     ISO2 + " VARCHAR(10) NOT NULL  " +")";
 
     final String CREATE_GROUPS=
             "CREATE TABLE " + TB_GROUPS + "(" +
                     ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
-                    GROUP_A + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_B + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_C + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_D + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_E + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_F + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_G + " VARCHAR(10) NOT NULL  ,  " +
-                    GROUP_H+ " VARCHAR(10) NOT NULL  " +")";
+                    TEAM1 + " VARCHAR(10) NOT NULL  ,  " +
+                    TEAM2 + " VARCHAR(10) NOT NULL  ,  " +
+                    TEAM3 + " VARCHAR(10) NOT NULL  ,  " +
+                    TEAM4 + " VARCHAR(10) NOT NULL  ,  " +
+                    "FOREIGN KEY("+TEAM1+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
+                    "FOREIGN KEY("+TEAM2+") REFERENCES "+TB_TEAMES+" ("+ID+") ,"+
+                    "FOREIGN KEY("+TEAM3+") REFERENCES "+TB_TEAMES+" ("+ID+"), "+
+                    "FOREIGN KEY("+TEAM4+") REFERENCES "+TB_TEAMES+" ("+ID+")"+")";
 
     final String CREATE_TB_MATCHES =
             "CREATE TABLE " + TB_MATCHES + "(" +
@@ -107,7 +109,7 @@ public class DBHelber extends SQLiteOpenHelper {
                     FINISHED + " VARCHAR(10) NOT NULL  ," +
                     HOME_TEAM+" INTEGER, "+
                     AWAY_TEAM+" INTEGER, "+
-                    HOME_TEAM_FLAG+" INTEGER, "+
+                    HOME_TEAM_FLAG+" INTEGER null, "+
                     AWAY_TEAM_FLAG+" INTEGER, "+
                     STADIUM+" INTEGER, "+
                     CHANNELS+" INTEGER, "+
@@ -154,12 +156,13 @@ public class DBHelber extends SQLiteOpenHelper {
 
     }
     //add to all contentnts of stadiums in sqlite
-    public void addStadiumsList(long id, String city, double lat, double lng, String name) {
+    public void addStadiumsList(long id, String city, String ar_city, double lat, double lng, String name) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put( ID, id );
         values.put( CITY, city );
+        values.put( AR_CITY, ar_city );
         values.put( NAME, name );
         values.put( LAT, lat );
         values.put( LNG, lng );
@@ -184,16 +187,35 @@ public class DBHelber extends SQLiteOpenHelper {
     }
 
     //add to all contentnts of channels in sqlite
-    public void addTeamsList(long id, String name,String flag,String iso2) {
+    public void addTeamsList(long id, long po,long res,String name,String ar_name,String flag,String iso2) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put( ID, id );
         values.put( NAME, name );
-        values.put( FLAG, flag );
+        values.put( AR_NAME,ar_name );
+        values.put( POINT, po );
+        values.put( RESULT, res );
+  values.put( FLAG, flag );
         values.put( ISO2, iso2 );
         long query = db.insertWithOnConflict( TB_TEAMES, null, values, SQLiteDatabase.CONFLICT_REPLACE );
         db.insertWithOnConflict( TB_TEAMES, null, values, SQLiteDatabase.CONFLICT_REPLACE );
+        Log.d( TAG, "add TB_TEAMES  list inserted into sqlite: " + query );
+        db.close();
+    }
+    public void addGroupList(long id, String name,long t1,long t2,long t3,long t4) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put( ID, id );
+        values.put( TEAM1, name );
+        values.put( TEAM1, t1 );
+        values.put( TEAM2, t2 );
+        values.put( TEAM3, t3);
+        values.put( TEAM4, t4);
+
+        long query = db.insertWithOnConflict( TB_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE );
+        db.insertWithOnConflict( TB_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE );
         Log.d( TAG, "add TB_TEAMES  list inserted into sqlite: " + query );
         db.close();
     }
@@ -202,15 +224,9 @@ public class DBHelber extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-
-
-
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_FORMATING);
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("GMT+3"));
         String formattedNow = simpleDateFormat.format(new  Date(System.currentTimeMillis()));
-
-
-
         values.put( ID, id );
         values.put( NAME, name );
 
@@ -226,8 +242,6 @@ public class DBHelber extends SQLiteOpenHelper {
         values.put( FINISHED, finished );
         values.put(TODAY, formattedNow);
 
-
-
         long query = db.insertWithOnConflict( TB_MATCHES, null, values, SQLiteDatabase.CONFLICT_REPLACE );
         db.insertWithOnConflict( TB_MATCHES, null, values, SQLiteDatabase.CONFLICT_REPLACE );
 
@@ -236,15 +250,7 @@ public class DBHelber extends SQLiteOpenHelper {
 
         db.close();
     }
-    public String getTimeZoneByLocale(final String languageTag){
-         Locale locale = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            locale = Locale.forLanguageTag(languageTag);
-        }
-        final Calendar cal = Calendar.getInstance(locale);
-        final TimeZone timeZone = cal.getTimeZone();
-        return timeZone.getID();
-    }
+
     public Cursor getMatchesListbyvalue() {
         SQLiteDatabase db = this.getReadableDatabase();
         String sql = "SELECT * FROM "+TB_MATCHES+"";
@@ -273,7 +279,42 @@ public class DBHelber extends SQLiteOpenHelper {
         Cursor c = db.rawQuery(sql, null);
         return c;
     }
+    public Cursor getTeamList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM "+TB_TEAMES;
 
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
+    public Cursor getGroupList() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT \n" +
+                "k.id as 'id',\n" +
+                "m1.name as 'team1',m2.name as 'team2', m3.name as 'team3',m4.name as 'team4',\n" +
+                "f1.flag as 'flag1',f2.flag as 'flag2', f3.flag as 'flag3',f4.flag as 'flag4',\n" +
+                "r1.res as 'res1',r2.res as 'res2', r3.res as 'res3',r4.res as 'res4',\n" +
+                "p1.po as 'po1',p2.po as 'po2', p3.po as 'po3',p4.po as 'po4'\n" +
+                "FROM tb_groups as k\n" +
+                "INNER JOIN tb_teames AS m1 ON m1.id=k.team1 \n" +
+                "INNER JOIN tb_teames AS m2 ON m2.id=k.team2\n" +
+                "INNER JOIN tb_teames AS m3 ON m3.id=k.team3 \n" +
+                "INNER JOIN tb_teames AS m4 ON m4.id=k.team4\n" +
+                "INNER JOIN tb_teames AS f1 ON f1.id=k.team1\n" +
+                "INNER JOIN tb_teames AS f2 ON f2.id=k.team2\n" +
+                "INNER JOIN tb_teames AS f3 ON f3.id=k.team3\n" +
+                "INNER JOIN tb_teames AS f4 ON f4.id=k.team4\n" +
+                "INNER JOIN tb_teames AS r1 ON r1.id=k.team1 \n" +
+                "INNER JOIN tb_teames AS r2 ON r2.id=k.team2\n" +
+                "INNER JOIN tb_teames AS r3 ON r3.id=k.team3 \n" +
+                "INNER JOIN tb_teames AS r4 ON r4.id=k.team4\n" +
+                "INNER JOIN tb_teames AS p1 ON p1.id=k.team1 \n" +
+                "INNER JOIN tb_teames AS p2 ON p2.id=k.team2\n" +
+                "INNER JOIN tb_teames AS p3 ON p3.id=k.team3 \n" +
+                "INNER JOIN tb_teames AS p4 ON p4.id=k.team4";
+
+        Cursor c = db.rawQuery(sql, null);
+        return c;
+    }
 
     public Cursor getMatchesByDayList(String now) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -294,7 +335,7 @@ public class DBHelber extends SQLiteOpenHelper {
                 "INNER JOIN tb_stadiums AS s2 ON s2.id=k.stadium\n" +
                 "INNER JOIN tb_stadiums AS s3 ON s3.id=k.stadium\n" +
                 "INNER JOIN tb_tvchannels AS tv ON tv.id=k.channels\n" +
-                " and k.day  ='"+now+"' ";
+                " and k.today  ='"+now+"' ";
         Cursor c = db.rawQuery(sql, null);
         return c;
     }

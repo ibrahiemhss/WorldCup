@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ibrahim.testworldcup">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,17 +22,17 @@
         </activity>
         <activity
             android:name=".ui.MatchesActiviy"
-            android:theme="@style/AppThemeNoActionBar"
-            ></activity>
-
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name=".dialoges.Location"
             android:theme="@style/AppThemeNoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_api_key"/>
+            android:value="@string/google_maps_api_key" />
 
+        <activity android:name=".ui.TeamsActivity" />
+        <activity android:name=".ui.GroupActivity"></activity>
     </application>
 
 </manifest>

@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         getAllContents=new GetAllContents (this);
+        getAllContents.getFBSGroups (this);
+
         getAllContents.getFBStaduims (this);
         getAllContents.getFBSTvChannel (this);
         getAllContents.getFBSTeams (this);
@@ -75,7 +77,21 @@ public class MainActivity extends AppCompatActivity {
                 startActivity (intent);
             }
         });
+        findViewById (R.id.BtnGoTeams).setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent (MainActivity.this, TeamsActivity.class);
+                startActivity (intent);
+            }
+        });
 
+        findViewById (R.id.BtnGoGroup).setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View view) {
+                Intent intent = new Intent (MainActivity.this, GroupActivity.class);
+                startActivity (intent);
+            }
+        });
     }
     private void displayOfline(){
         Calendar calendar = Calendar.getInstance();

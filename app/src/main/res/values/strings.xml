@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">testWorldCup</string>
     <string name="btnGoMatches">GOO To Mathes</string>
+    <string name="btnGoTeams">GOO To Teams</string>
+    <string name="btnGoGroup">GOO To Groups</string>
+
+
     <string name="google_maps_api_key">AIzaSyAYfkbHxioesQ1r8tWCW7lReXOb19aKxPQ</string>
 
 </resources>

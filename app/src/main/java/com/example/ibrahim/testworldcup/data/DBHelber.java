@@ -88,6 +88,7 @@ public class DBHelber extends SQLiteOpenHelper {
     final String CREATE_GROUPS=
             "CREATE TABLE " + TB_GROUPS + "(" +
                     ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                    NAME + " VARCHAR(2) NOT NULL, " +
                     TEAM1 + " VARCHAR(10) NOT NULL  ,  " +
                     TEAM2 + " VARCHAR(10) NOT NULL  ,  " +
                     TEAM3 + " VARCHAR(10) NOT NULL  ,  " +
@@ -203,16 +204,19 @@ public class DBHelber extends SQLiteOpenHelper {
         Log.d( TAG, "add TB_TEAMES  list inserted into sqlite: " + query );
         db.close();
     }
+
     public void addGroupList(long id, String name,long t1,long t2,long t3,long t4) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put( ID, id );
+        values.put( NAME, name );
         values.put( TEAM1, name );
         values.put( TEAM1, t1 );
         values.put( TEAM2, t2 );
         values.put( TEAM3, t3);
         values.put( TEAM4, t4);
+
 
         long query = db.insertWithOnConflict( TB_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE );
         db.insertWithOnConflict( TB_GROUPS, null, values, SQLiteDatabase.CONFLICT_REPLACE );
@@ -288,29 +292,29 @@ public class DBHelber extends SQLiteOpenHelper {
     }
     public Cursor getGroupList() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String sql = "SELECT \n" +
-                "k.id as 'id',\n" +
-                "m1.name as 'team1',m2.name as 'team2', m3.name as 'team3',m4.name as 'team4',\n" +
-                "f1.flag as 'flag1',f2.flag as 'flag2', f3.flag as 'flag3',f4.flag as 'flag4',\n" +
-                "r1.res as 'res1',r2.res as 'res2', r3.res as 'res3',r4.res as 'res4',\n" +
-                "p1.po as 'po1',p2.po as 'po2', p3.po as 'po3',p4.po as 'po4'\n" +
-                "FROM tb_groups as k\n" +
-                "INNER JOIN tb_teames AS m1 ON m1.id=k.team1 \n" +
-                "INNER JOIN tb_teames AS m2 ON m2.id=k.team2\n" +
-                "INNER JOIN tb_teames AS m3 ON m3.id=k.team3 \n" +
-                "INNER JOIN tb_teames AS m4 ON m4.id=k.team4\n" +
-                "INNER JOIN tb_teames AS f1 ON f1.id=k.team1\n" +
-                "INNER JOIN tb_teames AS f2 ON f2.id=k.team2\n" +
-                "INNER JOIN tb_teames AS f3 ON f3.id=k.team3\n" +
-                "INNER JOIN tb_teames AS f4 ON f4.id=k.team4\n" +
-                "INNER JOIN tb_teames AS r1 ON r1.id=k.team1 \n" +
-                "INNER JOIN tb_teames AS r2 ON r2.id=k.team2\n" +
-                "INNER JOIN tb_teames AS r3 ON r3.id=k.team3 \n" +
-                "INNER JOIN tb_teames AS r4 ON r4.id=k.team4\n" +
-                "INNER JOIN tb_teames AS p1 ON p1.id=k.team1 \n" +
-                "INNER JOIN tb_teames AS p2 ON p2.id=k.team2\n" +
-                "INNER JOIN tb_teames AS p3 ON p3.id=k.team3 \n" +
-                "INNER JOIN tb_teames AS p4 ON p4.id=k.team4";
+        String sql = " SELECT\n" +
+                " k.id as 'id',k.name as 'name',\n" +
+                " m1.name as 'team1',m2.name as 'team2', m3.name as 'team3',m4.name as 'team4',\n" +
+                " f1.flag as 'flag1',f2.flag as 'flag2', f3.flag as 'flag3',f4.flag as 'flag4',\n" +
+                " r1.res as 'res1',r2.res as 'res2', r3.res as 'res3',r4.res as 'res4',\n" +
+                " p1.po as 'po1',p2.po as 'po2', p3.po as 'po3',p4.po as 'po4'\n" +
+                " FROM tb_groups as k\n" +
+                " INNER JOIN tb_teames AS m1 ON m1.id=k.team1\n" +
+                " INNER JOIN tb_teames AS m2 ON m2.id=k.team2\n" +
+                " INNER JOIN tb_teames AS m3 ON m3.id=k.team3\n" +
+                " INNER JOIN tb_teames AS m4 ON m4.id=k.team4\n" +
+                " INNER JOIN tb_teames AS f1 ON f1.id=k.team1\n" +
+                " INNER JOIN tb_teames AS f2 ON f2.id=k.team2\n" +
+                " INNER JOIN tb_teames AS f3 ON f3.id=k.team3\n" +
+                " INNER JOIN tb_teames AS f4 ON f4.id=k.team4\n" +
+                " INNER JOIN tb_teames AS r1 ON r1.id=k.team1\n" +
+                " INNER JOIN tb_teames AS r2 ON r2.id=k.team2\n" +
+                " INNER JOIN tb_teames AS r3 ON r3.id=k.team3\n" +
+                " INNER JOIN tb_teames AS r4 ON r4.id=k.team4\n" +
+                " INNER JOIN tb_teames AS p1 ON p1.id=k.team1\n" +
+                " INNER JOIN tb_teames AS p2 ON p2.id=k.team2\n" +
+                " INNER JOIN tb_teames AS p3 ON p3.id=k.team3\n" +
+                " INNER JOIN tb_teames AS p4 ON p4.id=k.team4 ";
 
         Cursor c = db.rawQuery(sql, null);
         return c;
